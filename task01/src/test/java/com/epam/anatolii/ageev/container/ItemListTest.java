@@ -73,15 +73,15 @@ public class ItemListTest {
     }
 
     @Test
-    public void addAllByIndex_ShouldReturnTrue(){
+    public void addAllByIndex_LastElementShouldBeEqual(){
         int beforeSize = itemList.size();
         List<Item> arrayListItems = new ArrayList<>();
         arrayListItems.add(new Server(8L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
         arrayListItems.add(new Server(9L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
 
-        itemList.addAll(5,arrayListItems);
+        itemList.addAll(6,arrayListItems);
 
-        assertTrue(itemList.size()==arrayListItems.size()+beforeSize);
+        assertEquals(itemList.get(itemList.size()-1),new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
     }
 
 }

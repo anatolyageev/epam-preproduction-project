@@ -175,7 +175,7 @@ public class ItemList<T extends Item> implements List<Item> {
             arrayResize(this.size + c.size());
         }
 
-        System.arraycopy(itemArray, index, itemArray, index + c.size(), c.size());
+        System.arraycopy(itemArray, index, itemArray, index + c.size(), size-index);
         System.arraycopy(c.toArray(), 0, itemArray, index, c.size());
         size += c.size();
         return true;
