@@ -5,6 +5,7 @@ import com.epam.anatolii.ageev.entity.Server;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,6 +70,18 @@ public class ItemListTest {
         }
 
         assertTrue(testItemList.size() == 2);
+    }
+
+    @Test
+    public void addAllByIndex_ShouldReturnTrue(){
+        int beforeSize = itemList.size();
+        List<Item> arrayListItems = new ArrayList<>();
+        arrayListItems.add(new Server(8L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+        arrayListItems.add(new Server(9L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+
+        itemList.addAll(5,arrayListItems);
+
+        assertTrue(itemList.size()==arrayListItems.size()+beforeSize);
     }
 
 }
