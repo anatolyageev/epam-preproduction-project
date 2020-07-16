@@ -80,7 +80,7 @@ public class ItemListTest {
         arrayListItems.add(new Server(9L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
 
         itemList.addAll(6,arrayListItems);
-
+        assertTrue(itemList.size()==arrayListItems.size()+beforeSize);
         assertEquals(itemList.get(itemList.size()-1),new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
     }
 

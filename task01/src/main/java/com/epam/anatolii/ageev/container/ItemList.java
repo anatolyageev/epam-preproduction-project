@@ -14,6 +14,7 @@ public class ItemList<T extends Item> implements List<Item> {
 
     private int size;
     private Item[] itemArray;
+    private int modificationCount;
 
 
     public ItemList() {
@@ -55,6 +56,7 @@ public class ItemList<T extends Item> implements List<Item> {
     private class IteratorCustom implements Iterator<T> {
         private int cursor;
         private Predicate<T> predicate;
+        private int currentModification = modificationCount;
 
         public IteratorCustom(Predicate<T> predicate) {
             this.predicate = predicate;
@@ -72,6 +74,9 @@ public class ItemList<T extends Item> implements List<Item> {
 
         @Override
         public T next() {
+            if(currentModification!=modificationCount){
+                throw new ConcurrentModificationException();
+            }
             do {
                 if (cursor > size - 1) {
                     throw new NoSuchElementException();
@@ -84,7 +89,7 @@ public class ItemList<T extends Item> implements List<Item> {
 
     private class IteratorImpl implements Iterator<Item> {
         private int cursor;
-        private int lastRet = -1;
+        private int currentModification = modificationCount;
 
         @Override
         public boolean hasNext() {
@@ -93,12 +98,15 @@ public class ItemList<T extends Item> implements List<Item> {
 
         @Override
         public Item next() {
+            if(currentModification!=modificationCount){
+                throw new ConcurrentModificationException();
+            }
             int index = cursor;
             if (index < 0 || index > size - 1) {
                 throw new NoSuchElementException();
             }
             cursor = index + 1;
-            return itemArray[lastRet = index];
+            return itemArray[index];
         }
     }
 
@@ -124,22 +132,26 @@ public class ItemList<T extends Item> implements List<Item> {
     }
 
     private void checkCapacity() {
+        modificationCount++;
         if (size + 1 == itemArray.length) {
             arrayResize();
         }
     }
 
     private void arrayResize() {
+        modificationCount++;
         int newSize = itemArray.length << 1;
         itemArray = Arrays.copyOf(itemArray, newSize);
     }
 
     private void arrayResize(int newSize) {
+        modificationCount++;
         itemArray = Arrays.copyOf(itemArray, newSize);
     }
 
     @Override
     public boolean remove(Object o) {
+        modificationCount++;
         int index = indexOf(o);
         if (index == -1) {
             return false;
@@ -156,7 +168,7 @@ public class ItemList<T extends Item> implements List<Item> {
     @Override
     public boolean addAll(Collection<? extends Item> c) {
         checkNullItem(c);
-
+        modificationCount++;
         if (this.size + c.size() >= itemArray.length) {
             arrayResize(this.size + c.size());
         }
@@ -170,7 +182,7 @@ public class ItemList<T extends Item> implements List<Item> {
     public boolean addAll(int index, Collection<? extends Item> c) {
         checkNullItem(c);
         checkIndexForAddition(index);
-
+        modificationCount++;
         if (this.size + c.size() >= itemArray.length) {
             arrayResize(this.size + c.size());
         }
