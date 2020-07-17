@@ -50,7 +50,7 @@ public class ItemListTest {
     public void removeByIndex_shouldRemainSixItems() {
         int beforeSize = itemList.size();
         itemList.remove(0);
-        assertTrue(itemList.size() == beforeSize-1);
+        assertTrue(itemList.size() == beforeSize - 1);
     }
 
     @Test
@@ -73,15 +73,38 @@ public class ItemListTest {
     }
 
     @Test
-    public void addAllByIndex_LastElementShouldBeEqual(){
+    public void addAllByIndex_LastElementShouldBeEqual() {
         int beforeSize = itemList.size();
         List<Item> arrayListItems = new ArrayList<>();
         arrayListItems.add(new Server(8L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
         arrayListItems.add(new Server(9L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
 
-        itemList.addAll(6,arrayListItems);
-        assertTrue(itemList.size()==arrayListItems.size()+beforeSize);
-        assertEquals(itemList.get(itemList.size()-1),new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+        itemList.addAll(6, arrayListItems);
+        assertTrue(itemList.size() == arrayListItems.size() + beforeSize);
+        assertEquals(itemList.get(itemList.size() - 1), new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
     }
 
+    @Test
+    public void removeAll_ShouldReturnTrue() {
+        int beforeSize = itemList.size();
+        List<Item> arrayListItems = new ArrayList<>();
+        arrayListItems.add(new Server(6L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+        arrayListItems.add(new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+
+        itemList.removeAll(arrayListItems);
+
+        assertTrue(itemList.size() == beforeSize - arrayListItems.size());
+    }
+
+    @Test
+    public void retainAll_ShouldReturnTrue() {
+        int beforeSize = itemList.size();
+        List<Item> arrayListItems = new ArrayList<>();
+        arrayListItems.add(new Server(6L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+        arrayListItems.add(new Server(7L, 1000.00, "Intel core 9", 4.5, 48, "FX", 2, true));
+
+        itemList.retainAll(arrayListItems);
+
+        assertTrue(itemList.size() == arrayListItems.size());
+    }
 }
