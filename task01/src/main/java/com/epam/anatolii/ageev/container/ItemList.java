@@ -4,6 +4,7 @@ import com.epam.anatolii.ageev.entity.Item;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ItemList<T extends Item> implements List<Item> {
 
@@ -74,7 +75,7 @@ public class ItemList<T extends Item> implements List<Item> {
 
         @Override
         public T next() {
-            if(currentModification!=modificationCount){
+            if (currentModification != modificationCount) {
                 throw new ConcurrentModificationException();
             }
             do {
@@ -98,7 +99,7 @@ public class ItemList<T extends Item> implements List<Item> {
 
         @Override
         public Item next() {
-            if(currentModification!=modificationCount){
+            if (currentModification != modificationCount) {
                 throw new ConcurrentModificationException();
             }
             int index = cursor;
@@ -187,7 +188,7 @@ public class ItemList<T extends Item> implements List<Item> {
             arrayResize(this.size + c.size());
         }
 
-        System.arraycopy(itemArray, index, itemArray, index + c.size(), size-index);
+        System.arraycopy(itemArray, index, itemArray, index + c.size(), size - index);
         System.arraycopy(c.toArray(), 0, itemArray, index, c.size());
         size += c.size();
         return true;
@@ -208,9 +209,9 @@ public class ItemList<T extends Item> implements List<Item> {
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean result = false;
-        for (int i = 0; i < size; i++) {
-            if (c.contains(itemArray[i])) {
-                remove(i);
+        for (Object item : c) {
+            if (contains(item)) {
+                remove(item);
                 result = true;
             }
         }
@@ -220,12 +221,21 @@ public class ItemList<T extends Item> implements List<Item> {
     @Override
     public boolean retainAll(Collection<?> c) {
         boolean result = false;
-        for (int i = 0; i < size; i++) {
-            if (!c.contains(itemArray[i])) {
-                remove(i);
-                result = true;
+        Item[] retainArr = new Item[size];
+        int index = 0;
+
+        for (Object item : c) {
+            if (contains(item)) {
+                retainArr[index++] = (Item) item;
             }
         }
+
+        itemArray = retainArr;
+        result = index != size;
+        if (result) {
+            modificationCount++;
+        }
+        size = index;
         return result;
     }
 
