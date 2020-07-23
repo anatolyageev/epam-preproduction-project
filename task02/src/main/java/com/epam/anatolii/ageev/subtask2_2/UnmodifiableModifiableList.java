@@ -33,7 +33,7 @@ public class UnmodifiableModifiableList<T> implements List<T> {
         return new IteratorImpl();
     }
 
-    private class  IteratorImpl implements Iterator<T>{
+    private class IteratorImpl implements Iterator<T> {
         private int cursor;
 
         @Override
@@ -76,13 +76,10 @@ public class UnmodifiableModifiableList<T> implements List<T> {
 
     @Override
     public boolean remove(Object o) {
-        if (modifiablePart.contains(o)) {
-            return modifiablePart.remove(o);
-        }
         if (unmodifiablePart.contains(o)) {
             throw new UnmodifiablePartAccessExseption("The element is contained in an immutable part of the list");
         }
-        return false;
+        return modifiablePart.remove(o);
     }
 
     @Override
