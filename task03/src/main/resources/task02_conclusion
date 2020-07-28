@@ -1,0 +1,34 @@
+In the task, hash functions were made that lead to a large number of collisions that worsen the characteristics of the used collections.
+The output of LinkedHashMap is expected, outputs according to the sequence with which the elements were entered, even if there are collisions.
+We expect the same with HashMap, since this collection does not guarantee any ordering.
+
+В задании были сделаны хеш функции которые приводят к появлению большого количества коллизий которые ухудшают характеристики применяемых коллекций.
+Вывод LinkedHashMap ожидаем, выводит в соответтвии с тем с какой последовательностью были занесены элементы, даже при наличии коллизий.
+При HashMap  так же ожидаем, так как эта коллекция не гарантирует какой либо упорядоченности.
+
+
+hashFunctionStringItemHashMap:
+322 Server{Desktop{Computer{id=3, price=1003.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+431 Server{Desktop{Computer{id=1, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+431 Server{Desktop{Computer{id=2, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+431 Server{Desktop{Computer{id=4, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+----------------
+hashFunctionLengthItemHashMap:
+1 Server{Desktop{Computer{id=4, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+2 Server{Desktop{Computer{id=1, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+2 Server{Desktop{Computer{id=2, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+7 Server{Desktop{Computer{id=3, price=1003.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+----------------
+hashFunctionStringItemLinkedHashMap:
+431 Server{Desktop{Computer{id=1, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+431 Server{Desktop{Computer{id=2, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+322 Server{Desktop{Computer{id=3, price=1003.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+431 Server{Desktop{Computer{id=4, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+----------------
+hashFunctionLengthItemLinkedHashMap:
+2 Server{Desktop{Computer{id=1, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+2 Server{Desktop{Computer{id=2, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+7 Server{Desktop{Computer{id=3, price=1003.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+1 Server{Desktop{Computer{id=4, price=1000.0processorType='Intel core 9', processorFrequency=4.5, installedMemory=48}formFactor='FX'}cpuNumber=2, isIpmi=true}
+----------------
+
