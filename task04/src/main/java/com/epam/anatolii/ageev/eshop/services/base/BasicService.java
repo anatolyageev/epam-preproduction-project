@@ -11,4 +11,5 @@ public interface BasicService<ID, ENTITY> {
 
     void delete(ID id);
 
+    Collection<ENTITY> findAll();
 }

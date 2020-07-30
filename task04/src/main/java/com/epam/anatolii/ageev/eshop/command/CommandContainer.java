@@ -3,6 +3,11 @@ package com.epam.anatolii.ageev.eshop.command;
 import com.epam.anatolii.ageev.eshop.command.impl.*;
 
 import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 public class CommandContainer {
     private static Map<Integer, Command> commands = new LinkedHashMap<>();
