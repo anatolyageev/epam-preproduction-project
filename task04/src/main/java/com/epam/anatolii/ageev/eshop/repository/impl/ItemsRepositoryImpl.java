@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class ItemsRepositoryImpl implements ItemsRepository {
-    private Map<Long,Item> itemDb;
+    private Map<Long, Item> itemDb;
 
-    public ItemsRepositoryImpl(){
+    public ItemsRepositoryImpl() {
         this.itemDb = new HashMap<>();
     }
 
@@ -24,14 +24,14 @@ public class ItemsRepositoryImpl implements ItemsRepository {
     @Override
     public Item update(Item item) {
         checkItemId(item.getId());
-        itemDb.put(item.getId(),item);
+        itemDb.put(item.getId(), item);
         return item;
     }
 
     @Override
     public Item insert(Item item) {
-        item.setId(itemDb.size()+1L);
-        return itemDb.put(item.getId(),item);
+        item.setId(itemDb.size() + 1L);
+        return itemDb.put(item.getId(), item);
     }
 
     @Override
