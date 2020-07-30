@@ -10,6 +10,7 @@ public class ShowAllItemsFormCartCommand implements Command {
             System.out.println("\nCart is empty.\n");
             return;
         }
+
         computerShop.getCartService().findAll().forEach((id,quantity) -> {
             System.out.println(computerShop.getItemsService().getOne(id) + " - "
                     + quantity + ((quantity>1) ? " items.":" item."));

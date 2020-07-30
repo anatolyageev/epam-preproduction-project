@@ -6,6 +6,7 @@ import com.epam.anatolii.ageev.eshop.command.CommandContainer;
 import com.epam.anatolii.ageev.eshop.constants.CommandConstants;
 import com.epam.anatolii.ageev.eshop.utils.CommandUtils;
 
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,17 +16,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MakeOrderCommand implements Command {
-    private SimpleDateFormat format = new SimpleDateFormat("mm.dd.yyyy hh:mm");
+
+    private SimpleDateFormat format = new SimpleDateFormat("MM.dd.yyyy HH:mm");
 
     @Override
     public void execute(ComputerShop computerShop) {
-        Map<Long, Integer> cart = new HashMap<>();
-        cart = computerShop.getCartService().findAll();
+        Map<Long, Integer> cart = computerShop.getCartService().findAll();
 
         if (cart.isEmpty()) {
             System.out.println("Cart is empty!");
             return;
         }
+
         Date orderDate = CommandUtils.enterDate();
         computerShop.getOrderService().insert(orderDate,cart);
         CommandContainer.get(CommandConstants.SHOW_ALL_ITEMS_IN_CART).execute(computerShop);

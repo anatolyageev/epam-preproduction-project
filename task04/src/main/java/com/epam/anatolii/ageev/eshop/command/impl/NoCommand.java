@@ -1,6 +1,5 @@
 package com.epam.anatolii.ageev.eshop.command.impl;
 
-
 import com.epam.anatolii.ageev.eshop.ComputerShop;
 
 import com.epam.anatolii.ageev.eshop.command.Command;
