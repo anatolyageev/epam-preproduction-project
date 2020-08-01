@@ -21,12 +21,14 @@ public class MakeOrderCommand implements Command {
 
     @Override
     public void execute(ComputerShop computerShop) {
-        Map<Long, Integer> cart = computerShop.getCartService().findAll();
+        Map<Long, Integer> cart = new HashMap<>();
+        cart = computerShop.getCartService().findAll();
 
         if (cart.isEmpty()) {
             System.out.println("Cart is empty!");
             return;
         }
+
 
         Date orderDate = CommandUtils.enterDate();
         computerShop.getOrderService().insert(orderDate,cart);

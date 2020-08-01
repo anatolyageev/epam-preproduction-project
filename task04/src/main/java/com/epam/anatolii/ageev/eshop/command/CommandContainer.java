@@ -25,6 +25,7 @@ public class CommandContainer {
 
 
 
+
     static {
         commands.put(SHOW_ALL_ITEMS_COMMAND, new ShowAllItemsCommand());
         commands.put(ADD_ITEM_TO_CART_COMMAND, new AddItemToCartCommand());
@@ -33,6 +34,7 @@ public class CommandContainer {
         commands.put(SHOW_ALL_ITEMS_IN_CART, new ShowAllItemsFormCartCommand());
         commands.put(SHOW_ORDER_BY_DATE, new ShowOrderCommand());
         commands.put(SHOW_LAST_FIVE_ITEMS, new ShowLastFiveItemsCommand());
+
         commands.put(NO_SUCH_COMMAND, new NoCommand());
         commands.put(EXIT, new ExitCommand());
     }

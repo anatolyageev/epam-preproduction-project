@@ -20,7 +20,6 @@ public class FillInitData {
         computerShop.getItemsService().insert(new Server(7L, new BigDecimal(2000.00), "Intel core 9", 4.5, 48, "FX", 2, true));
         computerShop.getItemsService().insert(new Laptop(44L, new BigDecimal(750),"Intel core i5",2.6,8,13.2));
         computerShop.getItemsService().insert(new Desktop(7L, new BigDecimal(1500.00), "Intel core 9", 4.5, 48, "DX"));
-
     }
 
 

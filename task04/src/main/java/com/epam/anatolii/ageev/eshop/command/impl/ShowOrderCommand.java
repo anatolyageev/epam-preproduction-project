@@ -17,6 +17,7 @@ public class ShowOrderCommand implements Command {
 
         if (computerShop.getOrderService().findAll().isEmpty()) {
             System.out.println("Order list is empty!");
+
             return;
         }
         Date orderDate = CommandUtils.enterDate();
