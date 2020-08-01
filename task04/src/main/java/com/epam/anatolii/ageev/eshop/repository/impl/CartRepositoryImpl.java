@@ -37,4 +37,9 @@ public class CartRepositoryImpl implements CartRepository {
     public Map<Long, Integer> findAll() {
         return Collections.unmodifiableMap(clientCart);
     }
+
+    @Override
+    public void clear(){
+        clientCart = new HashMap<>();
+    }
 }

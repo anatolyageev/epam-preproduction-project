@@ -10,4 +10,6 @@ public interface CartRepository {
     void delete(Long id);
 
     Map<Long, Integer> findAll();
+
+    void clear();
 }

@@ -10,4 +10,6 @@ public interface CartService {
     void delete(Long id);
 
     Map<Long, Integer> findAll();
+
+    void clear();
 }

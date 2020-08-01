@@ -31,4 +31,9 @@ public class CartServiceImpl implements CartService {
     public Map<Long, Integer> findAll() {
         return cartRepository.findAll();
     }
+
+    @Override
+    public void clear(){
+        cartRepository.clear();
+    }
 }
