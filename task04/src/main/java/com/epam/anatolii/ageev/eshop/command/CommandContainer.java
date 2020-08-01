@@ -14,6 +14,8 @@ public class CommandContainer {
     private static final int SHOW_ALL_ORDERS_IN_DATES_COMMAND = 4;
     private static final int SHOW_ALL_ITEMS_IN_CART = 5;
     private static final int SHOW_ORDER_BY_DATE = 6;
+    private static final int SHOW_LAST_FIVE_ITEMS = 7;
+
 
     static {
         commands.put(SHOW_ALL_ITEMS_COMMAND, new ShowAllItemsCommand());
@@ -22,6 +24,7 @@ public class CommandContainer {
         commands.put(SHOW_ALL_ORDERS_IN_DATES_COMMAND, new ShowAllOrdersInDatesCommand());
         commands.put(SHOW_ALL_ITEMS_IN_CART, new ShowAllItemsFormCartCommand());
         commands.put(SHOW_ORDER_BY_DATE, new ShowOrderCommand());
+        commands.put(SHOW_LAST_FIVE_ITEMS, new ShowLastFiveItemsCommand());
         commands.put(NO_SUCH_COMMAND, new NoCommand());
         commands.put(EXIT, new ExitCommand());
     }
