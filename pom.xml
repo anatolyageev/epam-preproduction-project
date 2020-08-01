@@ -12,7 +12,10 @@
     <modules>
         <module>task01</module>
         <module>task02</module>
+<<<<<<< HEAD
         <module>task03</module>
+=======
+>>>>>>> 2c96a7946f8cdd601e6b37d963291ac1abdce684
         <module>task04</module>
     </modules>
 
