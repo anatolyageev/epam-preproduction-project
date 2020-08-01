@@ -23,6 +23,7 @@ public class AddItemToCartCommand implements Command {
                     computerShop.getCartService().add(itemId);
                     computerShop.getCashService().insert(itemId);
 
+
                     System.out.println("Item successfully added!");
                     break;
                 }else{

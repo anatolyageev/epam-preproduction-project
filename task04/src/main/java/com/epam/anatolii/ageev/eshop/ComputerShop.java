@@ -37,6 +37,8 @@ public class ComputerShop {
         this.cashRepository = new CashRepositoryImpl();
         this.cashService = new CashServiceImpl(cashRepository);
 
+
+
     }
 
     public ItemsService getItemsService() {
