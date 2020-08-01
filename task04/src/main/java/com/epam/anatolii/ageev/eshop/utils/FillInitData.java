@@ -4,13 +4,7 @@ import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.domain.Desktop;
 import com.epam.anatolii.ageev.eshop.domain.Laptop;
 import com.epam.anatolii.ageev.eshop.domain.Server;
-
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-
 
 public class FillInitData {
     public static void initShoprWhithItems(ComputerShop computerShop){
@@ -21,8 +15,4 @@ public class FillInitData {
         computerShop.getItemsService().insert(new Laptop(44L, new BigDecimal(750),"Intel core i5",2.6,8,13.2));
         computerShop.getItemsService().insert(new Desktop(7L, new BigDecimal(1500.00), "Intel core 9", 4.5, 48, "DX"));
     }
-
-
-
-
 }

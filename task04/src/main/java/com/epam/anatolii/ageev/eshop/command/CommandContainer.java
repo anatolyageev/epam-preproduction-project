@@ -1,15 +1,9 @@
 package com.epam.anatolii.ageev.eshop.command;
 
 import com.epam.anatolii.ageev.eshop.command.impl.*;
-
 import java.util.*;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
-
-
 
 public class CommandContainer {
     private static Map<Integer, Command> commands = new LinkedHashMap<>();
@@ -23,11 +17,6 @@ public class CommandContainer {
     private static final int SHOW_ORDER_BY_DATE = 6;
     private static final int SHOW_LAST_FIVE_ITEMS = 7;
 
-
-
-
-
-
     static {
         commands.put(SHOW_ALL_ITEMS_COMMAND, new ShowAllItemsCommand());
         commands.put(ADD_ITEM_TO_CART_COMMAND, new AddItemToCartCommand());
@@ -36,8 +25,6 @@ public class CommandContainer {
         commands.put(SHOW_ALL_ITEMS_IN_CART, new ShowAllItemsFormCartCommand());
         commands.put(SHOW_ORDER_BY_DATE, new ShowOrderCommand());
         commands.put(SHOW_LAST_FIVE_ITEMS, new ShowLastFiveItemsCommand());
-
-
 
         commands.put(NO_SUCH_COMMAND, new NoCommand());
         commands.put(EXIT, new ExitCommand());
@@ -63,5 +50,4 @@ public class CommandContainer {
     }
 
     public static Map<Integer, Command> getCommandsNomodif (){return Collections.unmodifiableMap(commands);}
-
 }

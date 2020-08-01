@@ -1,9 +1,6 @@
 package com.epam.anatolii.ageev.eshop.utils;
 
 import com.epam.anatolii.ageev.eshop.ComputerShop;
-import com.epam.anatolii.ageev.eshop.command.CommandContainer;
-import com.epam.anatolii.ageev.eshop.constants.CommandConstants;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -3,7 +3,6 @@ package com.epam.anatolii.ageev.eshop.command.impl;
 import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.command.Command;
 import com.epam.anatolii.ageev.eshop.utils.CommandUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -17,8 +16,6 @@ public class ShowOrderCommand implements Command {
 
         if (computerShop.getOrderService().findAll().isEmpty()) {
             System.out.println("Order list is empty!");
-
-
             return;
         }
         Date orderDate = CommandUtils.enterDate();

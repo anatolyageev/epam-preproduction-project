@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Menu {
 
-
     public void menuRunner(ComputerShop computerShop){
         Scanner scanner = new Scanner(System.in);
         while (true){
@@ -18,8 +17,6 @@ public class Menu {
             command.execute(computerShop);
         }
     }
-
-
 
     public void printMenu() {
         StringBuilder sb = new StringBuilder("Menu:" + System.lineSeparator());

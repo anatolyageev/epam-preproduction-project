@@ -13,7 +13,6 @@ public class ItemsRepositoryImpl implements ItemsRepository {
     private Map<Long, Item> itemDb;
 
     public ItemsRepositoryImpl() {
-
         this.itemDb = new HashMap<>();
     }
 
@@ -26,9 +25,7 @@ public class ItemsRepositoryImpl implements ItemsRepository {
     @Override
     public Item update(Item item) {
         checkItemId(item.getId());
-
         itemDb.put(item.getId(), item);
-
         return item;
     }
 

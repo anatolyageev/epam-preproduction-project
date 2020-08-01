@@ -4,7 +4,6 @@ import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.command.Command;
 import com.epam.anatolii.ageev.eshop.command.CommandContainer;
 import com.epam.anatolii.ageev.eshop.constants.CommandConstants;
-
 import java.util.Scanner;
 
 public class AddItemToCartCommand implements Command {
@@ -22,8 +21,6 @@ public class AddItemToCartCommand implements Command {
                 if (computerShop.getItemsService().getOne(itemId) != null) {
                     computerShop.getCartService().add(itemId);
                     computerShop.getCashService().insert(itemId);
-
-
                     System.out.println("Item successfully added!");
                     break;
                 }else{
