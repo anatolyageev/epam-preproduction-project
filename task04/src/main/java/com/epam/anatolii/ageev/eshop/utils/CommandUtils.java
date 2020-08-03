@@ -45,10 +45,10 @@ public class CommandUtils {
 
     public static BigDecimal getTotalPrice(ComputerShop computerShop, Map<Long, Integer> cart) {
         if (computerShop == null) {
-            throw new IllegalArgumentException("Computer Shop is empty!");
+            throw new NullPointerException("ComputerShop is Null!");
         }
         if(cart == null){
-            throw new IllegalArgumentException("Cart is empty!");
+            throw new NullPointerException("Cart is Null!");
         }
 
         BigDecimal totalPrice = new BigDecimal(0);
