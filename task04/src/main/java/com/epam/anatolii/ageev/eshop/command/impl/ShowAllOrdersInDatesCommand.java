@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.NavigableMap;
 
 public class ShowAllOrdersInDatesCommand implements Command {
-    SimpleDateFormat format = new SimpleDateFormat("MM.dd.yyyy hh:mm");
+    SimpleDateFormat format = new SimpleDateFormat(CommandUtils.DATE_FORMAT);
 
     @Override
     public void execute(ComputerShop computerShop) {
@@ -25,14 +25,14 @@ public class ShowAllOrdersInDatesCommand implements Command {
 
         Date orderDateTo = CommandUtils.enterDate();
 
-        NavigableMap<Date, Map<Long, Integer>> orderInfo = computerShop.getOrderService().findAll(orderDateFrom,orderDateTo);
+        NavigableMap<Date, Map<Long, Integer>> orderInfo = computerShop.getOrderService().findAll(orderDateFrom, orderDateTo);
 
-        for(Map.Entry order : orderInfo.entrySet()) {
+        for (Map.Entry order : orderInfo.entrySet()) {
             System.out.println("Date and time of the order: " + format.format(order.getKey()) +
                     System.lineSeparator());
-            CommandUtils.printOrder(computerShop,(Map) order.getValue());
+            CommandUtils.printOrder(computerShop, (Map) order.getValue());
             System.out.println(System.lineSeparator() + "Total price for the order: " +
-                    CommandUtils.getTotalPrice(computerShop, (Map)order.getValue()) +
+                    CommandUtils.getTotalPrice(computerShop, (Map) order.getValue()) +
                     System.lineSeparator());
         }
     }

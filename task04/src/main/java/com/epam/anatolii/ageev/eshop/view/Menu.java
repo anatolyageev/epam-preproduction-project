@@ -9,11 +9,17 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void menuRunner(ComputerShop computerShop){
+    public void menuRunner(ComputerShop computerShop) {
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             printMenu();
-            Command command = CommandContainer.get(Integer.valueOf(scanner.nextLine().trim()));
+            Integer commandId = -1;
+            try {
+                commandId = Integer.valueOf(scanner.nextLine().trim());
+            } catch (NumberFormatException ex) {
+                System.out.println("Please enter digits");
+            }
+            Command command = CommandContainer.get(commandId);
             command.execute(computerShop);
         }
     }

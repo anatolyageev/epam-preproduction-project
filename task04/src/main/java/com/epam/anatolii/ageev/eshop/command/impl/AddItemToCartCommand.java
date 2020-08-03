@@ -4,6 +4,7 @@ import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.command.Command;
 import com.epam.anatolii.ageev.eshop.command.CommandContainer;
 import com.epam.anatolii.ageev.eshop.constants.CommandConstants;
+
 import java.util.Scanner;
 
 public class AddItemToCartCommand implements Command {
@@ -23,7 +24,7 @@ public class AddItemToCartCommand implements Command {
                     computerShop.getCashService().insert(itemId);
                     System.out.println("Item successfully added!");
                     break;
-                }else{
+                } else {
                     System.out.println("No such Id in the list, try one more time.");
                 }
             } catch (NumberFormatException ex) {

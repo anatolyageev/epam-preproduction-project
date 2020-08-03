@@ -4,16 +4,17 @@ import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.command.Command;
 
 public class ShowAllItemsFormCartCommand implements Command {
+
     @Override
     public void execute(ComputerShop computerShop) {
-        if(computerShop.getCartService().findAll().isEmpty()){
+        if (computerShop.getCartService().findAll().isEmpty()) {
             System.out.println("\nCart is empty.\n");
             return;
         }
 
-        computerShop.getCartService().findAll().forEach((id,quantity) -> {
+        computerShop.getCartService().findAll().forEach((id, quantity) -> {
             System.out.println(computerShop.getItemsService().getOne(id) + " - "
-                    + quantity + ((quantity>1) ? " items.":" item."));
+                    + quantity + ((quantity > 1) ? " items." : " item."));
         });
     }
 

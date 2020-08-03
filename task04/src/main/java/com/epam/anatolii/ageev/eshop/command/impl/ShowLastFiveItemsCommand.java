@@ -6,7 +6,7 @@ import com.epam.anatolii.ageev.eshop.command.Command;
 public class ShowLastFiveItemsCommand implements Command {
     @Override
     public void execute(ComputerShop computerShop) {
-        if(computerShop.getCashService().findAll().isEmpty()){
+        if (computerShop.getCashService().findAll().isEmpty()) {
             System.out.println("You don't buy anything yet :)");
             return;
         }
