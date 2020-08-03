@@ -47,10 +47,12 @@ public class CommandUtils {
         if (computerShop == null) {
             throw new NullPointerException("ComputerShop is Null!");
         }
-        if(cart == null){
+        if (cart == null) {
             throw new NullPointerException("Cart is Null!");
         }
-
+        if (cart.isEmpty()) {
+            throw new NullPointerException("Cart is empty!");
+        }
         BigDecimal totalPrice = new BigDecimal(0);
         for (Map.Entry<Long, Integer> entry : cart.entrySet()) {
             totalPrice = totalPrice.add(computerShop.getItemsService()
