@@ -1,9 +1,10 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public abstract class Item {
+public abstract class Item implements Serializable {
     private Long id;
     private BigDecimal price;
 

@@ -9,7 +9,7 @@ public class ShopApplication {
         ComputerShop computerShop = new ComputerShop();
         Menu menu = new Menu();
 
-        FillInitData.initShoprWhithItems(computerShop);
+        FillInitData.initShopFromDB(computerShop);
         menu.menuRunner(computerShop);
     }
 }

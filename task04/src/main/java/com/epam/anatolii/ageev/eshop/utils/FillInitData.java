@@ -15,4 +15,9 @@ public class FillInitData {
         computerShop.getItemsService().insert(new Laptop(44L, new BigDecimal(750),"Intel core i5",2.6,8,13.2));
         computerShop.getItemsService().insert(new Desktop(7L, new BigDecimal(1500.00), "Intel core 9", 4.5, 48, "DX"));
     }
+
+    public static void initShopFromDB(ComputerShop computerShop){
+        SerializeUtils serializeUtils = new SerializeUtils();
+        serializeUtils.deSerialize(computerShop.getItemsService());
+    }
 }
