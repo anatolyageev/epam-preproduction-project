@@ -2,16 +2,12 @@ package com.epam.anatolii.ageev.task02.search_filter;
 
 import java.io.File;
 
-public class DummySearchFilter extends BaseSearchFilter{
-
-    public DummySearchFilter() {
-        super();
-    }
+public class DummyFilter extends SearchFilterImpl {
 
     @Override
     public boolean search(File file) {
-        if(!hasNext()){
-            return true;
+        if(!hasNext()) {
+            return false;
         }
         return searchNext(file);
     }

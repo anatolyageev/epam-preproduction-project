@@ -2,15 +2,8 @@ package com.epam.anatolii.ageev.task02.search_filter;
 
 import java.io.File;
 
-public abstract class BaseSearchFilter implements SearchFilter {
+public abstract class SearchFilterImpl implements SearchFilter {
     private SearchFilter nextSearchFilter;
-
-    public BaseSearchFilter(){
-    }
-
-    public BaseSearchFilter(SearchFilter nextSearchFilter){
-        this.nextSearchFilter = nextSearchFilter;
-    }
 
     public void setNextSearchFilter(SearchFilter nextSearchFilter) {
         this.nextSearchFilter = nextSearchFilter;

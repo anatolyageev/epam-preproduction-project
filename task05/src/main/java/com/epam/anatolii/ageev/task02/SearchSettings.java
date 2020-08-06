@@ -1,21 +1,48 @@
 package com.epam.anatolii.ageev.task02;
 
-import com.epam.anatolii.ageev.task02.search_filter.BaseSearchFilter;
-import com.epam.anatolii.ageev.task02.search_filter.DummySearchFilter;
-import com.epam.anatolii.ageev.task02.search_filter.FileNameSearchFilter;
-import com.epam.anatolii.ageev.task02.search_filter.SearchFilter;
+import com.epam.anatolii.ageev.task02.command.Command;
+import com.epam.anatolii.ageev.task02.command.CommandContainer;
+import com.epam.anatolii.ageev.task02.search_filter.DummyFilter;
+import com.epam.anatolii.ageev.task02.search_filter.SearchFilterImpl;
+import com.epam.anatolii.ageev.task02.utils.CommandUtils;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchSettings {
 
-    public SearchFilter setFilterByName(BaseSearchFilter searchFilter, File file) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Search by file name Y/N: 0/1");
-        String fileName = scanner.nextLine();
-        searchFilter = new FileNameSearchFilter(new DummySearchFilter(), fileName);
-        return searchFilter;
+    private String initDirectory;
+    private SearchFilterImpl searchFilter;
+    private CommandContainer commandContainer;
+    private List<File> resultList;
+
+    public List<File> start() {
+        searchFilter = new DummyFilter();
+        commandContainer = new CommandContainer();
+        resultList = new ArrayList<>();
+        while (true) {
+            initDirectory = CommandUtils.stringFilter("Please specify initial directory for search:");
+            if (new File(initDirectory).isDirectory()) {
+                break;
+            }
+        }
+        for (Command command : commandContainer) {
+            command.execute(searchFilter);
+        }
+
+        return fileSearch(new File(initDirectory));
     }
 
+    private List<File> fileSearch(File file) {
+
+        for (File f : file.listFiles()) {
+            if (f.isDirectory()) {
+                fileSearch(f);
+            } else if (searchFilter.search(f)) {
+                resultList.add(f);
+            }
+        }
+        return resultList;
+    }
 }
