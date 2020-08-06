@@ -6,8 +6,8 @@ public class DummyFilter extends SearchFilterImpl {
 
     @Override
     public boolean search(File file) {
-        if(!hasNext()) {
-            return false;
+        if (!hasNext()) {
+            return true;
         }
         return searchNext(file);
     }

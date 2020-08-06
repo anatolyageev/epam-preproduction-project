@@ -5,13 +5,14 @@ import java.io.File;
 public class FileExtensionFilter extends SearchFilterImpl {
     private String extension;
 
-    public FileExtensionFilter(String extension) {
+    public FileExtensionFilter(SearchFilter searchFilter, String extension) {
+        super(searchFilter);
         this.extension = extension;
     }
 
     @Override
     public boolean search(File file) {
-        if(file.getName().endsWith(extension)){
+        if (file.getName().endsWith(extension)) {
             return searchNext(file);
         }
         return false;

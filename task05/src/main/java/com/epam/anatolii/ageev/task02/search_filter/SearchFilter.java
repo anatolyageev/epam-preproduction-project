@@ -4,5 +4,5 @@ import java.io.File;
 
 public interface SearchFilter {
 
-      boolean search(File file);
+    boolean search(File file);
 }

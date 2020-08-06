@@ -9,11 +9,12 @@ import java.util.Scanner;
 
 public class FilterByFileNameCommand implements Command {
     @Override
-    public void execute(SearchFilterImpl searchFilter) {
+    public SearchFilterImpl execute(SearchFilterImpl searchFilter) {
         String outputChoice = "Search by file name Y/N: 1/0";
         String message = "Please enter file name: ";
-        if(CommandUtils.userInput(outputChoice)==1) {
-            searchFilter.setNextSearchFilter(new FileNameSearchFilter(CommandUtils.stringFilter(message)));
+        if (CommandUtils.userInput(outputChoice) == 1) {
+            searchFilter = new FileNameSearchFilter(searchFilter, CommandUtils.stringFilter(message));
         }
+        return searchFilter;
     }
 }

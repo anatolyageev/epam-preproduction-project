@@ -7,11 +7,12 @@ import com.epam.anatolii.ageev.task02.utils.CommandUtils;
 
 public class FilterByExtentionCommand implements Command {
     @Override
-    public void execute(SearchFilterImpl searchFilter) {
+    public SearchFilterImpl execute(SearchFilterImpl searchFilter) {
         String outputChoice = "Search by file extension Y/N: 1/0";
         String message = "Please enter extension";
-        if(CommandUtils.userInput(outputChoice)==1) {
-            searchFilter.setNextSearchFilter(new FileExtensionFilter(CommandUtils.stringFilter(message)));
+        if (CommandUtils.userInput(outputChoice) == 1) {
+            searchFilter = new FileExtensionFilter(searchFilter, CommandUtils.stringFilter(message));
         }
+        return searchFilter;
     }
 }

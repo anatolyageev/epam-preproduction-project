@@ -5,12 +5,16 @@ import java.io.File;
 public abstract class SearchFilterImpl implements SearchFilter {
     private SearchFilter nextSearchFilter;
 
-    public void setNextSearchFilter(SearchFilter nextSearchFilter) {
+    public SearchFilterImpl() {
+
+    }
+
+    public SearchFilterImpl(SearchFilter nextSearchFilter) {
         this.nextSearchFilter = nextSearchFilter;
     }
 
-    protected boolean hasNext(){
-       return nextSearchFilter != null;
+    protected boolean hasNext() {
+        return nextSearchFilter != null;
     }
 
     protected boolean searchNext(File file) {

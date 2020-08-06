@@ -8,35 +8,40 @@ import com.epam.anatolii.ageev.task02.utils.CommandUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchSettings {
 
-    private String initDirectory;
     private SearchFilterImpl searchFilter;
-    private CommandContainer commandContainer;
     private List<File> resultList;
 
     public List<File> start() {
+        CommandContainer commandContainer;
+        String initDirectory = "";
         searchFilter = new DummyFilter();
         commandContainer = new CommandContainer();
         resultList = new ArrayList<>();
-        while (true) {
+        boolean correctFolderFlag = false;
+        while (!correctFolderFlag) {
             initDirectory = CommandUtils.stringFilter("Please specify initial directory for search:");
             if (new File(initDirectory).isDirectory()) {
-                break;
+                correctFolderFlag = true;
             }
         }
         for (Command command : commandContainer) {
-            command.execute(searchFilter);
+            searchFilter = command.execute(searchFilter);
         }
-
+        System.out.println("Searching ...");
         return fileSearch(new File(initDirectory));
     }
 
     private List<File> fileSearch(File file) {
-
-        for (File f : file.listFiles()) {
+        File[] files = file.listFiles();
+        if (files == null) {
+            return resultList;
+        }
+        for (File f : files) {
             if (f.isDirectory()) {
                 fileSearch(f);
             } else if (searchFilter.search(f)) {

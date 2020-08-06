@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class CommandUtils {
 
-    public static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
-    public static final String DATE_REGEX = "\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}";
+    public static final String DATE_FORMAT = "dd.MM.yyyy";
+    public static final String DATE_REGEX = "\\d{2}\\.\\d{2}\\.\\d{4}";
 
     public static int userInput(String message) {
         Scanner scanner = new Scanner(System.in);
@@ -29,6 +29,20 @@ public class CommandUtils {
         return scanner.nextLine().trim();
     }
 
+    public static Long longFilter(String message) {
+        Scanner scanner = new Scanner(System.in);
+        Long result = 0L;
+        System.out.println(message);
+        while (true) {
+            try {
+                result = scanner.nextLong();
+            } catch (NumberFormatException ex) {
+                System.out.println("Please enter digits. ");
+            }
+            return result;
+        }
+    }
+
     private static boolean checkUserInput(String chose) {
         if (chose.equals("0") || chose.equals("1")) {
             return true;
@@ -37,11 +51,11 @@ public class CommandUtils {
     }
 
 
-    public static Date enterDate() {
+    public static Date enterDate(String message) {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         format.setLenient(false);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter date in the next format: " + DATE_FORMAT);
+        System.out.println(message + " using the next format: " + DATE_FORMAT);
 
         while (true) {
             String inputDate = scanner.nextLine().trim();
