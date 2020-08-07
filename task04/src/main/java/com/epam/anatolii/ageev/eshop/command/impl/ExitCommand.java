@@ -9,7 +9,7 @@ public class ExitCommand implements Command {
     public void execute(ComputerShop computerShop) {
         SerializeUtils serializeUtils = new SerializeUtils();
         System.out.println("See you!");
-        serializeUtils.serialize(computerShop.getItemsService());
+        serializeUtils.serialize(computerShop.getItemsService(), serializeUtils.FILE_FOR_SERIALIZATION);
         System.exit(0);
     }
 
