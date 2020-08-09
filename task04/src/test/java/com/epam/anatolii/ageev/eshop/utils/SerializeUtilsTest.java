@@ -1,6 +1,7 @@
 package com.epam.anatolii.ageev.eshop.utils;
 
 import com.epam.anatolii.ageev.eshop.ComputerShop;
+import com.epam.anatolii.ageev.eshop.view.Menu;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +21,8 @@ public class SerializeUtilsTest {
 
     @Before
     public void before() {
-        computerShop = new ComputerShop();
+        Menu menu = new Menu();
+        computerShop = new ComputerShop(menu.initMode());
         serializeUtils = new SerializeUtils();
         FillInitData.initShopFromDB(computerShop,FILE_FOR_SERIALIZATION);
         fileSerialize = new File(FILE_FOR_SERIALIZATION);

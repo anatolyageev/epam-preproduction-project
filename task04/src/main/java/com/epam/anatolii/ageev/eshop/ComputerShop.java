@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop;
 
+import com.epam.anatolii.ageev.eshop.admin_services.strategy.ItemBuildContainer;
+import com.epam.anatolii.ageev.eshop.admin_services.strategy.Mode;
 import com.epam.anatolii.ageev.eshop.repository.CartRepository;
 import com.epam.anatolii.ageev.eshop.repository.CashRepository;
 import com.epam.anatolii.ageev.eshop.repository.ItemsRepository;
@@ -18,6 +20,8 @@ import com.epam.anatolii.ageev.eshop.services.impl.ItemServiceImpl;
 import com.epam.anatolii.ageev.eshop.services.impl.OrderServiceImpl;
 
 public class ComputerShop {
+    private final Mode FILL_MODE;
+
     private ItemsRepository itemsRepository;
     private CartRepository cartRepository;
     private OrderRepository orderRepository;
@@ -26,8 +30,10 @@ public class ComputerShop {
     private CartService cartService;
     private OrderService orderService;
     private CashService cashService;
+    private ItemBuildContainer itemBuildContainer;
 
-    public ComputerShop(){
+    public ComputerShop(Mode mode) {
+        FILL_MODE = mode;
         this.itemsRepository = new ItemsRepositoryImpl();
         this.itemsService = new ItemServiceImpl(itemsRepository);
         this.cartRepository = new CartRepositoryImpl();
@@ -36,7 +42,11 @@ public class ComputerShop {
         this.orderService = new OrderServiceImpl(orderRepository);
         this.cashRepository = new CashRepositoryImpl();
         this.cashService = new CashServiceImpl(cashRepository);
+        this.itemBuildContainer = new ItemBuildContainer(mode.getImplementation());
+    }
 
+    public Mode getFILL_MODE() {
+        return FILL_MODE;
     }
 
     public ItemsService getItemsService() {
@@ -51,7 +61,11 @@ public class ComputerShop {
         return orderService;
     }
 
-    public CashService getCashService(){
+    public CashService getCashService() {
         return this.cashService;
+    }
+
+    public ItemBuildContainer getItemBuildContainer() {
+        return this.itemBuildContainer;
     }
 }

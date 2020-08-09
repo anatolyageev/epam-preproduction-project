@@ -1,19 +1,19 @@
 package com.epam.anatolii.ageev.eshop.utils;
 
 import com.epam.anatolii.ageev.eshop.ComputerShop;
+import com.epam.anatolii.ageev.eshop.admin_services.strategy.Strategy;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class CommandUtils {
     public static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
     public static final String DATE_REGEX = "\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}";
+    public static final String DIGIT_FORMAT = "[+-]?([0-9]*[.])?[0-9]+";
 
     public static Date enterDate() {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
@@ -37,6 +37,10 @@ public class CommandUtils {
             }
 
         }
+    }
+
+    public static boolean digitCheck(String input){
+        return input.matches(DIGIT_FORMAT);
     }
 
     private static boolean validateDateInput(String input) {
@@ -67,5 +71,13 @@ public class CommandUtils {
             System.out.println(computerShop.getItemsService().getOne(entry.getKey()) + " - "
                     + entry.getValue() + ((entry.getValue() > 1) ? " items." : " item."));
         }
+    }
+
+    public static Double getRandomDouble(int minPrice, int maxPrice){
+        double random = new Random().nextDouble();
+        random = minPrice + (random * (maxPrice - minPrice));
+        BigDecimal bd = BigDecimal.valueOf(random);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
