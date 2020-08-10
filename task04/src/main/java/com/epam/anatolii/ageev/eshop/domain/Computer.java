@@ -60,10 +60,10 @@ public abstract class Computer extends Item {
 
     @Override
     public String toString() {
-        return "Computer{" + super.toString() +
+        return  super.toString() +
                 "processorType='" + processorType + '\'' +
                 ", processorFrequency=" + processorFrequency +
                 ", installedMemory=" + installedMemory +
-                '}';
+                ", ";
     }
 }

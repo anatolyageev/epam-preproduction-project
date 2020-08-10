@@ -4,6 +4,8 @@ import com.epam.anatolii.ageev.eshop.utils.FillInitData;
 import com.epam.anatolii.ageev.eshop.utils.SerializeUtils;
 import com.epam.anatolii.ageev.eshop.view.Menu;
 
+import java.io.File;
+
 public class ShopApplication {
 
     public static void main(String[] args) {
@@ -11,7 +13,11 @@ public class ShopApplication {
 
         ComputerShop computerShop = new ComputerShop(menu.initMode());
 
-        FillInitData.initShopFromDB(computerShop, new SerializeUtils().FILE_FOR_SERIALIZATION);
+        if(new File(new SerializeUtils().FILE_FOR_SERIALIZATION).exists()) {
+            FillInitData.initShopFromDB(computerShop, new SerializeUtils().FILE_FOR_SERIALIZATION);
+        }else{
+            FillInitData.initShopWithItems(computerShop);
+        }
         menu.menuRunner(computerShop);
     }
 }

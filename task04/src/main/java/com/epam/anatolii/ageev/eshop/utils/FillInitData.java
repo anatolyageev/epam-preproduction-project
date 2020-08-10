@@ -7,7 +7,7 @@ import com.epam.anatolii.ageev.eshop.domain.Server;
 import java.math.BigDecimal;
 
 public class FillInitData {
-    public static void initShoprWhithItems(ComputerShop computerShop){
+    public static void initShopWithItems(ComputerShop computerShop){
         computerShop.getItemsService().insert(new Server(1L, new BigDecimal(3000.00), "Intel core 9", 4.5, 48, "FX", 2, true));
         computerShop.getItemsService().insert(new Server(4L, new BigDecimal(4000.00), "Intel core 9", 4.5, 48, "FX", 2, true));
         computerShop.getItemsService().insert(new Server(6L, new BigDecimal(5000.00), "Intel core 9", 4.5, 48, "FX", 2, true));

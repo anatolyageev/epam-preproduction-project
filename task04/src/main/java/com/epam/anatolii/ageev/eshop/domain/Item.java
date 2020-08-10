@@ -49,6 +49,6 @@ public abstract class Item implements Serializable {
     @Override
     public String toString() {
         return "id=" + id +
-                ", price=" + price;
+                ", price=" + price + ", ";
     }
 }
