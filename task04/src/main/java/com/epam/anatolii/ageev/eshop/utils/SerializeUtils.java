@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
 public class SerializeUtils {
-    public static final String FILE_FOR_SERIALIZATION = "task04\\src\\main\\resources\\ItemsDB.txt";
 
     public void serialize (ItemsService itemsService, String file){
         try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))){
@@ -38,29 +37,4 @@ public class SerializeUtils {
             itemList.forEach(itemsService::insert);
         }
     }
-
-    public void serializeSeveralTimes(ItemsService itemsService, int times, String file){
-        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))){
-            for(int i = 0; i<times; i++) {
-                outputStream.writeObject(new ArrayList<>(itemsService.findAll()));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void serializeSeveralTimesZip(ItemsService itemsService, int times, String file){
-        try(ObjectOutputStream outputStream = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(file)))){
-            for(int i = 0; i<times; i++) {
-                outputStream.writeObject(new ArrayList<>(itemsService.findAll()));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -7,13 +7,7 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 public class AutoStrategyImpl implements Strategy {
-    private Random random = new Random();
-    private final int MIN_PRICE = 1000;
-    private final int MAX_PRICE = 10000;
-    private final int MIN_FREQ = 2;
-    private final int MAX_FREQ = 4;
-    private final int MIN_SCREEN_SIZE = 10;
-    private final int MAX_SCREEN_SIZE = 17;
+    private final Random random = new Random();
 
     @Override
     public Long initId() {
@@ -22,7 +16,9 @@ public class AutoStrategyImpl implements Strategy {
 
     @Override
     public BigDecimal initPrice() {
-        return BigDecimal.valueOf(CommandUtils.getRandomDouble(MIN_PRICE,MAX_PRICE));
+        final int MIN_PRICE = 1000;
+        final int MAX_PRICE = 10000;
+        return BigDecimal.valueOf(CommandUtils.getRandomDouble(MIN_PRICE, MAX_PRICE));
     }
 
     @Override
@@ -32,7 +28,9 @@ public class AutoStrategyImpl implements Strategy {
 
     @Override
     public Double initProcessorFrequency() {
-        return CommandUtils.getRandomDouble(MIN_FREQ,MAX_FREQ);
+        final int MIN_FREQ = 2;
+        final int MAX_FREQ = 4;
+        return CommandUtils.getRandomDouble(MIN_FREQ, MAX_FREQ);
     }
 
     @Override
@@ -47,7 +45,9 @@ public class AutoStrategyImpl implements Strategy {
 
     @Override
     public Double initScreenSize() {
-        return CommandUtils.getRandomDouble(MIN_SCREEN_SIZE,MAX_SCREEN_SIZE);
+        final int MIN_SCREEN_SIZE = 10;
+        final int MAX_SCREEN_SIZE = 17;
+        return CommandUtils.getRandomDouble(MIN_SCREEN_SIZE, MAX_SCREEN_SIZE);
     }
 
     @Override

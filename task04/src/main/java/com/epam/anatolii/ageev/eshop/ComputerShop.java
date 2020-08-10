@@ -22,27 +22,23 @@ import com.epam.anatolii.ageev.eshop.services.impl.OrderServiceImpl;
 public class ComputerShop {
     private final Mode FILL_MODE;
 
-    private ItemsRepository itemsRepository;
-    private CartRepository cartRepository;
-    private OrderRepository orderRepository;
-    private CashRepository cashRepository;
-    private ItemsService itemsService;
-    private CartService cartService;
-    private OrderService orderService;
-    private CashService cashService;
-    private ItemBuildContainer itemBuildContainer;
+    private final ItemsService itemsService;
+    private final CartService cartService;
+    private final OrderService orderService;
+    private final CashService cashService;
+    private final ItemBuildContainer itemBuildContainer;
 
     public ComputerShop(Mode mode) {
         FILL_MODE = mode;
-        this.itemsRepository = new ItemsRepositoryImpl();
-        this.itemsService = new ItemServiceImpl(itemsRepository);
-        this.cartRepository = new CartRepositoryImpl();
-        this.cartService = new CartServiceImpl(cartRepository);
-        this.orderRepository = new OrderRepositoryImpl();
-        this.orderService = new OrderServiceImpl(orderRepository);
-        this.cashRepository = new CashRepositoryImpl();
-        this.cashService = new CashServiceImpl(cashRepository);
-        this.itemBuildContainer = new ItemBuildContainer(mode.getImplementation());
+        ItemsRepository itemsRepository = new ItemsRepositoryImpl();
+        itemsService = new ItemServiceImpl(itemsRepository);
+        CartRepository cartRepository = new CartRepositoryImpl();
+        cartService = new CartServiceImpl(cartRepository);
+        OrderRepository orderRepository = new OrderRepositoryImpl();
+        orderService = new OrderServiceImpl(orderRepository);
+        CashRepository cashRepository = new CashRepositoryImpl();
+        cashService = new CashServiceImpl(cashRepository);
+        itemBuildContainer = new ItemBuildContainer(mode.getImplementation());
     }
 
     public Mode getFILL_MODE() {

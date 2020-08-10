@@ -27,11 +27,11 @@ public class AddNewItemToDBCommand implements Command {
 
     private void printBuildMenu(Map<Integer, BuildItem> map) {
         StringBuilder sb = new StringBuilder("Please choose item to create:" + System.lineSeparator());
-        for (Map.Entry entry : map.entrySet()) {
-            sb.append(entry.getKey()).append(" - ");
-            BuildItem buildItem = (BuildItem) entry.getValue();
-            sb.append(buildItem.builderName() + System.lineSeparator());
-        }
+        map.forEach((key, value) -> {
+            sb.append(key).append(" - ")
+                    .append(value.builderName())
+                    .append(System.lineSeparator());
+        });
         System.out.println(sb.toString());
     }
 
@@ -42,7 +42,7 @@ public class AddNewItemToDBCommand implements Command {
         while (true) {
             printBuildMenu(buildContainer.getBuilders());
             try {
-                builderId = Integer.valueOf(scanner.nextLine().trim());
+                builderId = Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException ex) {
                 System.out.println("Please enter digits");
             }
