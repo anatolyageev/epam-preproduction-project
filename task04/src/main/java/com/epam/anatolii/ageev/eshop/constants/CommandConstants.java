@@ -10,4 +10,5 @@ public class CommandConstants {
     public static final int SHOW_ALL_ITEMS_IN_CART = 5;
     public static final int SHOW_ORDER_BY_DATE = 6;
     public static final int SHOW_LAST_FIVE_ITEMS = 7;
+    public static final int ADD_NEW_ITEM_TO_DB = 8;
 }
