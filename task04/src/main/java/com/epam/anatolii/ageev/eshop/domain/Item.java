@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import com.epam.anatolii.ageev.eshop.annotations.FieldDescription;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -20,6 +22,7 @@ public abstract class Item implements Serializable {
         return id;
     }
 
+    @FieldDescription("ID")
     public void setId(Long id) {
         this.id = id;
     }
@@ -28,6 +31,7 @@ public abstract class Item implements Serializable {
         return price;
     }
 
+    @FieldDescription("PRICE")
     public void setPrice(BigDecimal price) {
         this.price = price;
     }

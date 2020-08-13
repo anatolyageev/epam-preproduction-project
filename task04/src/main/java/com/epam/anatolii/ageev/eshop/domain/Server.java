@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import com.epam.anatolii.ageev.eshop.annotations.FieldDescription;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -43,6 +45,7 @@ public class Server extends Desktop{
         return cpuNumber;
     }
 
+    @FieldDescription("CPU_NUMBER")
     public void setCpuNumber(Integer cpuNumber) {
         this.cpuNumber = cpuNumber;
     }
@@ -51,6 +54,7 @@ public class Server extends Desktop{
         return isIpmi;
     }
 
+    @FieldDescription("IPMI")
     public void setIpmi(Boolean ipmi) {
         isIpmi = ipmi;
     }

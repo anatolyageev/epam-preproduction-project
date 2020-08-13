@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import com.epam.anatolii.ageev.eshop.annotations.FieldDescription;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -33,6 +35,7 @@ public class Desktop extends Computer {
         return formFactor;
     }
 
+    @FieldDescription("FORM_FACTOR")
     public void setFormFactor(String formFactor) {
         this.formFactor = formFactor;
     }
