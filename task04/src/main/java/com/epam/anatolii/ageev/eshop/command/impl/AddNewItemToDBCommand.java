@@ -4,7 +4,6 @@ import com.epam.anatolii.ageev.eshop.ComputerShop;
 import com.epam.anatolii.ageev.eshop.admin_services.strategy.BuildItem;
 import com.epam.anatolii.ageev.eshop.admin_services.strategy.ItemBuildContainer;
 import com.epam.anatolii.ageev.eshop.command.Command;
-import com.epam.anatolii.ageev.eshop.command.CommandContainer;
 import com.epam.anatolii.ageev.eshop.domain.Item;
 
 import java.util.Map;
@@ -14,10 +13,10 @@ public class AddNewItemToDBCommand implements Command {
 
     @Override
     public void execute(ComputerShop computerShop) {
-        BuildItem buildItem = billderSelector(computerShop.getItemBuildContainer());
+        BuildItem buildItem = builderSelector(computerShop.getItemBuildContainer());
         Item item = buildItem.buld();
         computerShop.getItemsService().insert(item);
-        System.out.println("Item "+ item + " was successfully added to DB.");
+        System.out.println("Item " + item + " was successfully added to DB.");
     }
 
     @Override
@@ -27,18 +26,15 @@ public class AddNewItemToDBCommand implements Command {
 
     private void printBuildMenu(Map<Integer, BuildItem> map) {
         StringBuilder sb = new StringBuilder("Please choose item to create:" + System.lineSeparator());
-        map.forEach((key, value) -> {
-            sb.append(key).append(" - ")
-                    .append(value.builderName())
-                    .append(System.lineSeparator());
-        });
+        map.forEach((key, value) -> sb.append(key).append(" - ")
+                .append(value.builderName())
+                .append(System.lineSeparator()));
         System.out.println(sb.toString());
     }
 
-    private BuildItem billderSelector(ItemBuildContainer buildContainer){
+    private BuildItem builderSelector(ItemBuildContainer buildContainer) {
         Scanner scanner = new Scanner(System.in);
         int builderId = -1;
-        //BuildItem buildItem;
         while (true) {
             printBuildMenu(buildContainer.getBuilders());
             try {
@@ -46,9 +42,9 @@ public class AddNewItemToDBCommand implements Command {
             } catch (NumberFormatException ex) {
                 System.out.println("Please enter digits");
             }
-            if(buildContainer.getBuilder(builderId)!=null) {
+            if (buildContainer.getBuilder(builderId) != null) {
                 return buildContainer.getBuilder(builderId);
-            }else {
+            } else {
                 System.out.println("Please enter correct values.");
             }
         }
