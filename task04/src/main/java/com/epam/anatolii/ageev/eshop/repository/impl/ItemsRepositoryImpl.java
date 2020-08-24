@@ -18,7 +18,7 @@ public class ItemsRepositoryImpl implements ItemsRepository {
 
     @Override
     public Item getOne(Long id) {
-        checkItemId(id);
+       // checkItemId(id);
         return itemDb.get(id);
     }
 

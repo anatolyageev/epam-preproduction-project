@@ -29,7 +29,7 @@ public class CommandContainer {
      * Returns command object with the given Id.
      *
      * @param commandId Id of the command.
-     * @return Command object.
+     * @return ServerCommand object.
      */
     public static Command get(Integer commandId) {
         if (commandId == null || !commands.containsKey(commandId)) {
