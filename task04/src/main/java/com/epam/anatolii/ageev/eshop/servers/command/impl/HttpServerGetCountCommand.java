@@ -7,7 +7,6 @@ public class HttpServerGetCountCommand implements ServerCommand {
     @Override
     public String execute(String fullCommand, ItemsService itemsService) {
 
-
         return "{count:" +
                 itemsService.findAll().size() +
                 "}";

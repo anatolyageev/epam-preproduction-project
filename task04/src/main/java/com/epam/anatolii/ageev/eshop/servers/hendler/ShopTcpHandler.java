@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 import static com.epam.anatolii.ageev.eshop.constants.ServerConstants.NO_SUCH_COMMAND;
 
-
 /**
  * Class for handle client requests for TCP Server.
  */
