@@ -12,7 +12,7 @@ function validate() {
     var text;
 
     if (!regexUserId.test(userId)) {
-        text = "Please Enter valid User Id";
+        text = "Please Enter valid User Id. Min length 8 symbols";
         error_message.innerHTML = text;
         return false;
     }
