@@ -1,7 +1,7 @@
 package com.epam.anatolii.ageev.services.impl;
 
 import com.epam.anatolii.ageev.domain.User;
-import com.epam.anatolii.ageev.exeptions.ResourceNotFoundException;
+import com.epam.anatolii.ageev.exeptions.ItemNotFoundException;
 import com.epam.anatolii.ageev.repository.UserRepository;
 import com.epam.anatolii.ageev.services.UserService;
 
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getOne(String login) {
         return Optional.ofNullable(userRepository.getOne(login))
-                .orElseThrow(()-> new ResourceNotFoundException(NO_USER_WITH_LOGIN + login));
+                .orElseThrow(()-> new ItemNotFoundException(NO_USER_WITH_LOGIN + login));
     }
 
     @Override
