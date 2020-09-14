@@ -6,6 +6,7 @@ import com.epam.anatolii.ageev.captcha.impl.SessionCaptchaServiceImpl;
 
 import javax.servlet.ServletContext;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.epam.anatolii.ageev.constants.WebConstant.*;
@@ -21,6 +22,6 @@ public class CaptchaServiceFactory {
 
     public static CaptchaService getCaptchaService(ServletContext context) {
         String captchaServiceType = context.getInitParameter(CAPTCHA_TYPE);
-        return captchaServiceMap.get(captchaServiceType);
+        return Optional.ofNullable( captchaServiceMap.get(captchaServiceType)).orElse(captchaServiceMap.get(SESSION_CONST));
     }
 }

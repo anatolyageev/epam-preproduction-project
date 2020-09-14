@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>captchaTimeout</param-name>
-        <param-value>60000</param-value>
+        <param-value>120000</param-value>
     </context-param>
     <context-param>
         <param-name>captchaType</param-name>
