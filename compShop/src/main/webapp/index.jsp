@@ -1,3 +1,5 @@
+<%@include file="/WEB-INF/jspf/format.jspf"%>
+<%@include file="/WEB-INF/jspf/jspInput.jspf"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.html">Register</a>
+                    <a class="nav-link" href="registration">Register</a>
                 </li>
             </ul>
         </div>
