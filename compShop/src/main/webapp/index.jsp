@@ -1,11 +1,11 @@
-<%@include file="/WEB-INF/jspf/format.jspf"%>
-<%@include file="/WEB-INF/jspf/jspInput.jspf"%>
+<%@include file="/WEB-INF/jspf/format.jspf" %>
+<%@include file="/WEB-INF/jspf/jspInput.jspf" %>
+<%@include file="/WEB-INF/jspf/taglib.jspf" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -18,7 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="styles/shop-homepage.css" rel="stylesheet">
-
+    <link href="styles/nav-bar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                         <span class="sr-only">(current)</span>
@@ -41,6 +41,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="registration">Register</a>
                 </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <tgcp:login/>
             </ul>
         </div>
     </div>

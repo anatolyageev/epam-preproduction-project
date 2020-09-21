@@ -35,7 +35,7 @@
             <button type="submit" class="submit-btn">Log in</button>
         </form>
 
-        <form id="register" class="input-group" action="registration" onsubmit="return validate();" method="post">
+        <form id="register" class="input-group input-group-register" action="registration" onsubmit="return validate();" method="post" enctype="multipart/form-data">
             <input id="user-id" type="text" class="input-field" name="userId" placeholder="User Id"
                    value="${userId_value}" required/>
             <input id="name" type="text" class="input-field" name="name" placeholder="Name"
@@ -49,7 +49,7 @@
                    required/>
             <input id="check-box-reg" type="checkbox" class="check-box"><span class="span-reg">I agree to the terms and conditions</span>
     </div>
-
+            <input id="mail" type="file" class="input-field" name="user_avatar" accept="image/*" />
             <tgcp:captcha/>
             <button type="submit" class="submit-btn">Register</button>
         </form>

@@ -54,6 +54,19 @@ public class LoginUtils {
         return errors;
     }
 
+    public static Map<String, String> checkLogin(HttpServletRequest request) {
+        Map<String, String> errors = new HashMap<>();
+        String login = request.getParameter(USER_ID);
+        String password = request.getParameter(USER_PASSWORD);
+        if (Objects.isNull(login)) {
+            errors.put(USER_NAME, INVALID_USER_NAME);
+        }
+        if (Objects.isNull(password)) {
+            errors.put(USER_PASSWORD, INVALID_USER_PASSWORD);
+        }
+        return errors;
+    }
+
     public static boolean isCaptchaValid(CaptchaService captchaService, String captcha, HttpServletRequest req) {
         boolean result = true;
         Map<Long, String> captchaMap = captchaService.getCaptchaMap();

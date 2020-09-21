@@ -3,9 +3,7 @@ package com.epam.anatolii.ageev.repository.impl;
 import com.epam.anatolii.ageev.domain.User;
 import com.epam.anatolii.ageev.repository.UserRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserRepositoryImpl implements UserRepository {
     private Map<String, User> userDb;
@@ -25,17 +23,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteUser(String login) {
-        userDb.remove(login);
+    public boolean deleteUser(String login) {
+        return !Objects.isNull(userDb.remove(login));
     }
 
     @Override
     public User createUser(User user) {
-        return userDb.put(user.getLogin(), user);
-    }
-
-    @Override
-    public User updateUser(User user) {
         return userDb.put(user.getLogin(), user);
     }
 

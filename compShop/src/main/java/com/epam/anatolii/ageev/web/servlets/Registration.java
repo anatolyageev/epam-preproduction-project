@@ -3,11 +3,13 @@ package com.epam.anatolii.ageev.web.servlets;
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.domain.UserFromForm;
 import com.epam.anatolii.ageev.services.UserService;
+import com.epam.anatolii.ageev.web.utils.AvatarsUtils;
 import com.epam.anatolii.ageev.web.utils.LoginUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import java.util.Map;
 import static com.epam.anatolii.ageev.constants.WebConstant.*;
 
 @WebServlet("/registration")
+@MultipartConfig
 public class Registration extends HttpServlet {
      final static Logger LOG = Logger.getLogger(Registration.class);
      CaptchaService captchaService;
@@ -68,7 +71,10 @@ public class Registration extends HttpServlet {
         }
 
         userService.createUser(userFromForm.getUser());
+        AvatarsUtils.saveAvatar(req,userFromForm.getLogin());
+        LOG.debug("user.dir: " + System.getProperty("user.dir"));
         emptyValuesAndErrors(req);
+        LOG.debug("getRealPath: " + req.getServletContext().getRealPath(""));
         resp.sendRedirect("index.jsp");
 
         LOG.debug(getClass() + " doPost() ended");
