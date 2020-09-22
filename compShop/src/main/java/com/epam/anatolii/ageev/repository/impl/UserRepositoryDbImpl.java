@@ -76,8 +76,8 @@ public class UserRepositoryDbImpl implements UserRepository {
     }
 
     @Override
-    public User createUser(User user) {
-        ResultSet rs = null;
+    public User createUser(User user)  {
+        ResultSet rs;
         try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
             ps.setString(index++, user.getLogin());

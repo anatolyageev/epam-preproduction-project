@@ -1,11 +1,11 @@
 package com.epam.anatolii.ageev.web.utils;
 
+import com.epam.anatolii.ageev.exeptions.AvatarException;
 import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,16 +33,16 @@ public class AvatarsUtils {
         return serverPath;
     }
 
-    public static void saveAvatar(HttpServletRequest request, String login) throws IOException, ServletException {
+    public static void saveAvatar(HttpServletRequest request, String login) throws ServletException, AvatarException {
         checkPath();
         final String saveAvatarPath = serverPath + login + ".png";
         LOG.debug("File save path: " + saveAvatarPath);
-        Part avatarFile = request.getPart(USER_AVATAR);
-        try (InputStream inputStream = avatarFile.getInputStream()) {
+        try (InputStream inputStream = request.getPart(USER_AVATAR).getInputStream()) {
             BufferedImage bufferedImage = ImageIO.read(inputStream);
             ImageIO.write(bufferedImage, "png", new File(saveAvatarPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("File save path: " + saveAvatarPath);
+            throw new AvatarException("File cannot be saved.");
         }
     }
 }

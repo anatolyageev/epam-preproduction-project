@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
         String login = req.getParameter(USER_ID);
         String password = req.getParameter(USER_PASSWORD);
         LOG.debug(String.format("Url form request ==> %s", req.getRequestURL()));
-        LOG.debug(String.format("Params from reqest ==> %s%s%s;  ", login, "; ", password));
+        LOG.debug(String.format("Params from reqest ==> %s;%s;  ", login, password));
 
         UserService userService = (UserService) req.getServletContext().getAttribute(USER_SERVICE);
         if (userService.checkUserExistInDb(login)) {

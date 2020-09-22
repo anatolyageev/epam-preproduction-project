@@ -51,7 +51,6 @@ public class TransactionManagerImpl implements TransactionManager {
             JdbcConnectionHolder.setConnection(connection);
             result = (T) repositoryExecutor.execute();
         } catch (SQLException throwables) {
-            rollback(connection);
             LOG.error("TransactionManagerImpl method executeDqlTransaction() error --> " + throwables);
         } finally {
             closeConnection(connection);
