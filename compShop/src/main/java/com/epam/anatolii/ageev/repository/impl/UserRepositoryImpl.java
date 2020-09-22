@@ -3,7 +3,10 @@ package com.epam.anatolii.ageev.repository.impl;
 import com.epam.anatolii.ageev.domain.User;
 import com.epam.anatolii.ageev.repository.UserRepository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class UserRepositoryImpl implements UserRepository {
     private Map<String, User> userDb;
@@ -24,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean deleteUser(String login) {
-        return !Objects.isNull(userDb.remove(login));
+        return Objects.nonNull(userDb.remove(login));
     }
 
     @Override

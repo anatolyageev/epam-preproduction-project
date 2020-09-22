@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.epam.anatolii.ageev.constants.WebConstant.SERVER_USER_DIR;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_AVATAR;
 
 public class AvatarsUtils {
@@ -20,7 +21,7 @@ public class AvatarsUtils {
     private static final String AVATAR_FOLDER = File.separator + "avatars" + File.separator;
 
     private static void checkPath() {
-        serverPath = System.getProperty("catalina.home") + AVATAR_FOLDER;
+        serverPath = System.getProperty(SERVER_USER_DIR) + AVATAR_FOLDER;
         File path = new File(serverPath);
         if (!path.exists()) {
             path.mkdir();

@@ -36,5 +36,5 @@ public class WebConstant {
 
     public static final String AVATAR_PNG_EXTENSION = ".png";
     public static final String AVATAR_PNG_FORMAT_NAME = "png";
-
+    public static final String SERVER_USER_DIR = "catalina.home";
 }

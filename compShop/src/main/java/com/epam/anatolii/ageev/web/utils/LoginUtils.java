@@ -14,8 +14,20 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
-import static com.epam.anatolii.ageev.constants.Messages.*;
-import static com.epam.anatolii.ageev.constants.WebConstant.*;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_CAPTCHA_VALUE;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_ID;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_LAST_NAME;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_MAIL;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_NAME;
+import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_PASSWORD;
+import static com.epam.anatolii.ageev.constants.Messages.TIMEOUT_USER_CAPTCHA;
+import static com.epam.anatolii.ageev.constants.WebConstant.REGISTER_ERROR;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_CAPTCHA;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_EMAIL;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_LAST_NAME;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_NAME;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_PASSWORD;
 
 public class LoginUtils {
     public static final String REGEX_USER_ID = "^(?!\\d+$)\\w{8,20}";

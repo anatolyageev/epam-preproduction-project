@@ -24,23 +24,23 @@ public class UserServiceDbImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return null;
+        return transactionManager.executeDqlTransaction(() -> userRepository.getAll());
     }
 
     @Override
     public User getOne(String login) {
-       return Optional.ofNullable( transactionManager.executeDqlTransaction(() -> userRepository.getOne(login)))
-                .orElseThrow(()-> new ItemNotFoundException(NO_USER_WITH_LOGIN + login));
+        return Optional.ofNullable(transactionManager.executeDqlTransaction(() -> userRepository.getOne(login)))
+                .orElseThrow(() -> new ItemNotFoundException(NO_USER_WITH_LOGIN + login));
     }
 
     @Override
     public boolean deleteUser(String login) {
-       return transactionManager.executeDmlTransaction(()->userRepository.deleteUser(login));
+        return transactionManager.executeDmlTransaction(() -> userRepository.deleteUser(login));
     }
 
     @Override
     public User createUser(User user) {
-        return transactionManager.executeDmlTransaction(()->userRepository.createUser(user));
+        return transactionManager.executeDmlTransaction(() -> userRepository.createUser(user));
     }
 
     @Override

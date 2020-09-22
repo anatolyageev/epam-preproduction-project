@@ -6,13 +6,25 @@ import com.epam.anatolii.ageev.repository.db.JdbcConnectionHolder;
 import com.epam.anatolii.ageev.repository.utils.JdbcUtils;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.epam.anatolii.ageev.constants.sql.Fields.*;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.*;
+import static com.epam.anatolii.ageev.constants.sql.Fields.ENTITY_ID;
+import static com.epam.anatolii.ageev.constants.sql.Fields.USER_EMAIL;
+import static com.epam.anatolii.ageev.constants.sql.Fields.USER_FIRST_NAME;
+import static com.epam.anatolii.ageev.constants.sql.Fields.USER_LAST_NAME;
+import static com.epam.anatolii.ageev.constants.sql.Fields.USER_LOGIN;
+import static com.epam.anatolii.ageev.constants.sql.Fields.USER_PASSWORD;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_DELETE_USER;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ALL;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GEY_ONE;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_INSERT_USER;
+
 
 public class UserRepositoryDbImpl implements UserRepository {
     final static Logger LOG = Logger.getLogger(UserRepositoryDbImpl.class);
@@ -20,13 +32,13 @@ public class UserRepositoryDbImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         List<User> userList = new ArrayList<>();
-        try(Statement st = JdbcConnectionHolder.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(SQL_GET_ALL)) {
-            while (rs.next()){
+        try (Statement st = JdbcConnectionHolder.getConnection().createStatement();
+             ResultSet rs = st.executeQuery(SQL_GET_ALL)) {
+            while (rs.next()) {
                 userList.add(userFromResultSet(rs));
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            LOG.error("Repository method getAll() error --> " + throwables);
         }
         return userList;
     }
@@ -34,16 +46,15 @@ public class UserRepositoryDbImpl implements UserRepository {
     @Override
     public User getOne(String login) {
         ResultSet rs = null;
-        try(PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_GEY_ONE)) {
-            ps.setString(1,login);
+        try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_GEY_ONE)) {
+            ps.setString(1, login);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return userFromResultSet(rs);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        finally {
+            LOG.error("Repository method getOne() error --> " + throwables);
+        } finally {
             JdbcUtils.closeResultSet(rs);
         }
         return null;
@@ -52,14 +63,13 @@ public class UserRepositoryDbImpl implements UserRepository {
     @Override
     public boolean deleteUser(String login) {
         boolean result = false;
-        try(PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_DELETE_USER)) {
+        try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_DELETE_USER)) {
             LOG.debug("Repository method deleteUser() start --> " + login);
-            if (ps.executeUpdate()>0){
+            if (ps.executeUpdate() > 0) {
                 result = true;
             }
             LOG.debug("Repository method deleteUser() finish --> " + login);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
             LOG.error("Repository method deleteUser() error --> " + throwables);
         }
         return result;
@@ -68,26 +78,23 @@ public class UserRepositoryDbImpl implements UserRepository {
     @Override
     public User createUser(User user) {
         ResultSet rs = null;
-        try(PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
-            int index =1;
-            ps.setString(index++,user.getLogin());
-            ps.setString(index++,user.getFirstName());
-            ps.setString(index++,user.getLastName());
-            ps.setString(index++,user.getEmail());
-            ps.setString(index++,user.getPassword());
-            if(ps.executeUpdate()>0){
+        try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
+            int index = 1;
+            ps.setString(index++, user.getLogin());
+            ps.setString(index++, user.getFirstName());
+            ps.setString(index++, user.getLastName());
+            ps.setString(index++, user.getEmail());
+            ps.setString(index++, user.getPassword());
+            if (ps.executeUpdate() > 0) {
                 rs = ps.getGeneratedKeys();
-                if (rs != null && rs.next()) {
+                if (Objects.nonNull(rs) && rs.next()) {
                     Long id = rs.getLong(1);
                     user.setId(id);
                 }
             }
             LOG.debug("Repository method createUser() --> " + user);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        finally {
-            JdbcUtils.closeResultSet(rs);
+            LOG.error("Repository method createUser() error --> " + throwables);
         }
         return user;
     }

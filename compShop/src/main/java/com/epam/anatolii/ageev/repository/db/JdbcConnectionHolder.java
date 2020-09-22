@@ -5,15 +5,15 @@ import java.sql.Connection;
 public class JdbcConnectionHolder {
     private static final ThreadLocal<Connection> storeConnection = new ThreadLocal<>();
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         return storeConnection.get();
     }
 
-    public static void setConnection(Connection connection){
+    public static void setConnection(Connection connection) {
         storeConnection.set(connection);
     }
 
-    public static void removeConnection(){
+    public static void removeConnection() {
         storeConnection.remove();
     }
 }
