@@ -2,18 +2,23 @@ package com.epam.anatolii.ageev.web.utils;
 
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.domain.UserFromForm;
-import org.apache.log4j.Logger;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
+import com.epam.anatolii.ageev.exeptions.AvatarException;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.log4j.Logger;
 
+import static com.epam.anatolii.ageev.constants.Messages.AVATAR_CANNOT_BE_SAVED;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_CAPTCHA_VALUE;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_ID;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_LAST_NAME;
@@ -22,6 +27,7 @@ import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_NAME;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_PASSWORD;
 import static com.epam.anatolii.ageev.constants.Messages.TIMEOUT_USER_CAPTCHA;
 import static com.epam.anatolii.ageev.constants.WebConstant.REGISTER_ERROR;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_AVATAR;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_CAPTCHA;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_EMAIL;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;
@@ -45,8 +51,9 @@ public class LoginUtils {
                 request.getParameter(USER_CAPTCHA));
     }
 
-    public static Map<String, String> checkForm(UserFromForm userFromForm) {
+    public static Map<String, String> checkForm(UserFromForm userFromForm, HttpServletRequest req) {
         Map<String, String> errors = new HashMap<>();
+
 
         if (Objects.isNull(userFromForm.getLogin()) || !userFromForm.getLogin().matches(REGEX_USER_ID)) {
             errors.put(USER_ID, INVALID_USER_ID);
@@ -63,6 +70,14 @@ public class LoginUtils {
         if (Objects.isNull(userFromForm.getPassword()) || !userFromForm.getPassword().matches(REGEX_PASSWORD)) {
             errors.put(USER_PASSWORD, INVALID_USER_PASSWORD);
         }
+
+        try {
+            AvatarsUtils.saveAvatar(req, userFromForm.getLogin());
+        } catch (AvatarException | ServletException exception) {
+            errors.put(USER_AVATAR, AVATAR_CANNOT_BE_SAVED);
+            LOG.debug("Avatar cannot be saved");
+        }
+
         return errors;
     }
 
@@ -84,11 +99,9 @@ public class LoginUtils {
         Map<Long, String> captchaMap = captchaService.getCaptchaMap();
         String error = "";
         if (captchaMap.containsKey(captchaService.getTimeCreatedCaptcha(req))) {
-            LOG.debug("Time from servise: " + captchaService.getTimeCreatedCaptcha(req));
+            LOG.debug("Time from service: " + captchaService.getTimeCreatedCaptcha(req));
 
-            captchaMap.entrySet().stream().forEach(es -> {
-                LOG.debug("Time from map:" + es.getKey() + " || " + es.getValue());
-            });
+            captchaMap.forEach((key, value) -> LOG.debug("Time from map:" + key + " || " + value));
 
             result = captcha.equals(captchaMap.get(captchaService.getTimeCreatedCaptcha(req)));
             if (!result) {

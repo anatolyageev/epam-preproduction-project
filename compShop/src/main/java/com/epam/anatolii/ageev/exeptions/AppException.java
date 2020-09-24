@@ -5,7 +5,7 @@ package com.epam.anatolii.ageev.exeptions;
  *
  * @author Anatoliy Ageev
  */
-public class AppException extends Exception {
+public class AppException extends RuntimeException {
 
     private static final long serialVersionUID = 8288779062647218916L;
 

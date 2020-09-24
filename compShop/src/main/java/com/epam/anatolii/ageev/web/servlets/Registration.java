@@ -2,6 +2,7 @@ package com.epam.anatolii.ageev.web.servlets;
 
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.domain.UserFromForm;
+import com.epam.anatolii.ageev.exeptions.AvatarException;
 import com.epam.anatolii.ageev.services.UserService;
 import com.epam.anatolii.ageev.web.utils.AvatarsUtils;
 import com.epam.anatolii.ageev.web.utils.LoginUtils;
@@ -51,7 +52,7 @@ public class Registration extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.debug(getClass() + " doPost() started");
         UserFromForm userFromForm = LoginUtils.getUserFromForm(req);
-        Map<String, String> errors = LoginUtils.checkForm(userFromForm);
+        Map<String, String> errors = LoginUtils.checkForm(userFromForm, req);
 
         if (!LoginUtils.isCaptchaValid(captchaService, userFromForm.getUserCaptcha(), req)) {
             putValuesToAttributes(req, userFromForm);
@@ -77,8 +78,8 @@ public class Registration extends HttpServlet {
         }
 
         userService.createUser(userFromForm.getUser());
-        AvatarsUtils.saveAvatar(req, userFromForm.getLogin());
         emptyValuesAndErrors(req);
+
         resp.sendRedirect("index.jsp");
 
         LOG.debug(getClass() + " doPost() ended");

@@ -3,13 +3,16 @@ package com.epam.anatolii.ageev.captcha;
 import com.epam.anatolii.ageev.captcha.impl.CookieCaptchaServiceImpl;
 import com.epam.anatolii.ageev.captcha.impl.HiddenFieldCaptchaServiceImpl;
 import com.epam.anatolii.ageev.captcha.impl.SessionCaptchaServiceImpl;
-
-import javax.servlet.ServletContext;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.servlet.ServletContext;
 
-import static com.epam.anatolii.ageev.constants.WebConstant.*;
+
+import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_TYPE;
+import static com.epam.anatolii.ageev.constants.WebConstant.COOKIE_CONST;
+import static com.epam.anatolii.ageev.constants.WebConstant.FIELD_CONST;
+import static com.epam.anatolii.ageev.constants.WebConstant.SESSION_CONST;
 
 public class CaptchaServiceFactory {
     private static Map<String,CaptchaService> captchaServiceMap;

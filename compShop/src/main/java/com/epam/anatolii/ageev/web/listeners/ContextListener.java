@@ -3,10 +3,13 @@ package com.epam.anatolii.ageev.web.listeners;
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.captcha.CaptchaServiceFactory;
 import com.epam.anatolii.ageev.captcha.impl.RemoveOldCaptcha;
+import com.epam.anatolii.ageev.exeptions.DBException;
 import com.epam.anatolii.ageev.repository.UserRepository;
+import com.epam.anatolii.ageev.repository.db.DataSourceManager;
 import com.epam.anatolii.ageev.repository.impl.UserRepositoryDbImpl;
 import com.epam.anatolii.ageev.services.UserService;
 import com.epam.anatolii.ageev.services.impl.UserServiceDbImpl;
+import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
@@ -34,7 +37,8 @@ public class ContextListener implements ServletContextListener {
         LOG.debug("Captcha timeout: " + captchaTime);
         ServletContext servletContext = servletContextEvent.getServletContext();
         UserRepository userRepository = new UserRepositoryDbImpl();
-        UserService userService = new UserServiceDbImpl(userRepository);
+        DataSource dataSource = DataSourceManager.getDataSource();
+        UserService userService = new UserServiceDbImpl(userRepository, dataSource);
         servletContext.setAttribute(USER_SERVICE, userService);
         CaptchaService captchaService = CaptchaServiceFactory.getCaptchaService(servletContextEvent.getServletContext());
         RemoveOldCaptcha removeOldCaptcha = new RemoveOldCaptcha(captchaService, Long.parseLong(captchaTime));

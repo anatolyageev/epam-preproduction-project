@@ -20,28 +20,32 @@ import static com.epam.anatolii.ageev.constants.DbConnectionConstants.INIT_CONTE
 public class DataSourceManager {
     private static final Logger LOG = Logger.getLogger(DataSourceManager.class);
     private static DataSourceManager instance;
-    private DataSource ds;
+    private final DataSource ds;
 
     private DataSourceManager() throws DBException {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup(INIT_CONTEXT_LOOKUP);
             ds = (DataSource) envContext.lookup(DATA_SOURCE);
-            LOG.trace("Data source ==> " + ds);
+            LOG.debug("Data source: " + ds);
         } catch (NamingException ex) {
             LOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
         }
     }
 
-    public static synchronized DataSourceManager getInstance() throws DBException {
+    public static synchronized DataSourceManager getInstance()  {
         if (instance == null) {
-            instance = new DataSourceManager();
+            try {
+                instance = new DataSourceManager();
+            } catch (DBException e) {
+                LOG.error("Data source error " + e);
+            }
         }
         return instance;
     }
 
-    public static synchronized DataSource getDataSource() throws DBException {
+    public static synchronized DataSource getDataSource() {
         return getInstance().ds;
     }
 }

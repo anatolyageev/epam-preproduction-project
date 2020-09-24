@@ -1,6 +1,7 @@
 package com.epam.anatolii.ageev.repository.impl;
 
 import com.epam.anatolii.ageev.domain.User;
+import com.epam.anatolii.ageev.exeptions.DBException;
 import com.epam.anatolii.ageev.repository.UserRepository;
 import com.epam.anatolii.ageev.repository.db.JdbcConnectionHolder;
 import com.epam.anatolii.ageev.repository.utils.JdbcUtils;
@@ -39,6 +40,7 @@ public class UserRepositoryDbImpl implements UserRepository {
             }
         } catch (SQLException throwables) {
             LOG.error("Repository method getAll() error --> " + throwables);
+            throw new DBException("Cannot obtain users from the database.", throwables);
         }
         return userList;
     }
@@ -54,6 +56,7 @@ public class UserRepositoryDbImpl implements UserRepository {
             }
         } catch (SQLException throwables) {
             LOG.error("Repository method getOne() error --> " + throwables);
+            throw new DBException("Cannot obtain user from the database.", throwables);
         } finally {
             JdbcUtils.closeResultSet(rs);
         }
@@ -71,6 +74,7 @@ public class UserRepositoryDbImpl implements UserRepository {
             LOG.debug("Repository method deleteUser() finish --> " + login);
         } catch (SQLException throwables) {
             LOG.error("Repository method deleteUser() error --> " + throwables);
+            throw new DBException("Cannot delete user from the database.", throwables);
         }
         return result;
     }
@@ -95,6 +99,7 @@ public class UserRepositoryDbImpl implements UserRepository {
             LOG.debug("Repository method createUser() --> " + user);
         } catch (SQLException throwables) {
             LOG.error("Repository method createUser() error --> " + throwables);
+            throw new DBException("Cannot create user from the database.", throwables);
         }
         return user;
     }
