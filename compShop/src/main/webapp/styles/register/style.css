@@ -65,10 +65,15 @@
 }
 
 .input-group{
-    top: 180px;
     position: absolute;
     width: 280px;
     transition: 0.5s;
+}
+.input-group {
+    top: 180px;
+}
+.input-group-register{
+    top: 140px;
 }
 
 .input-field{

@@ -10,11 +10,9 @@ public interface UserRepository {
 
     User getOne(String login);
 
-    void deleteUser(String login);
+    boolean deleteUser(String login);
 
     User createUser(User user);
-
-    User updateUser(User user);
 
     boolean checkUserExistInDb(String login);
 }

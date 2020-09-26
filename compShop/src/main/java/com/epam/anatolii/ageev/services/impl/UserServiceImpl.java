@@ -25,24 +25,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getOne(String login) {
         return Optional.ofNullable(userRepository.getOne(login))
-                .orElseThrow(()-> new ItemNotFoundException(NO_USER_WITH_LOGIN + login));
+                .orElseThrow(() -> new ItemNotFoundException(NO_USER_WITH_LOGIN + login));
     }
 
     @Override
-    public void deleteUser(String login) {
-        getOne(login);
-        userRepository.deleteUser(login);
+    public boolean deleteUser(String login) {
+        return userRepository.deleteUser(login);
     }
 
     @Override
     public User createUser(User user) {
         return userRepository.createUser(user);
-    }
-
-    @Override
-    public User updateUser(User user) {
-        getOne(user.getLogin());
-        return userRepository.updateUser(user);
     }
 
     @Override
