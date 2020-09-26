@@ -25,7 +25,7 @@ public class TransactionManagerImpl implements TransactionManager {
         try {
             connection = dataSource.getConnection();
             JdbcConnectionHolder.setConnection(connection);
-            result = (T) repositoryExecutor.execute();
+            result = repositoryExecutor.execute();
             connection.commit();
         } catch (SQLException | DBException throwables) {
             rollback(connection);

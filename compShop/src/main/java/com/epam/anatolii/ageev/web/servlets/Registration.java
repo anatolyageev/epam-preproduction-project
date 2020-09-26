@@ -2,12 +2,11 @@ package com.epam.anatolii.ageev.web.servlets;
 
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.domain.UserFromForm;
-import com.epam.anatolii.ageev.exeptions.AvatarException;
 import com.epam.anatolii.ageev.services.UserService;
 import com.epam.anatolii.ageev.web.utils.AvatarsUtils;
 import com.epam.anatolii.ageev.web.utils.LoginUtils;
-import org.apache.log4j.Logger;
-
+import java.io.IOException;
+import java.util.Map;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,8 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
+import org.apache.log4j.Logger;
+
 
 import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_STRATEGY;
 import static com.epam.anatolii.ageev.constants.WebConstant.REGISTER_ERROR;
@@ -77,6 +76,7 @@ public class Registration extends HttpServlet {
             return;
         }
 
+        AvatarsUtils.saveAvatar(req, userFromForm.getLogin());
         userService.createUser(userFromForm.getUser());
         emptyValuesAndErrors(req);
 

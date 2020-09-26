@@ -71,13 +71,6 @@ public class LoginUtils {
             errors.put(USER_PASSWORD, INVALID_USER_PASSWORD);
         }
 
-        try {
-            AvatarsUtils.saveAvatar(req, userFromForm.getLogin());
-        } catch (AvatarException | ServletException exception) {
-            errors.put(USER_AVATAR, AVATAR_CANNOT_BE_SAVED);
-            LOG.debug("Avatar cannot be saved");
-        }
-
         return errors;
     }
 

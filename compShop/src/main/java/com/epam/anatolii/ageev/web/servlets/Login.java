@@ -24,7 +24,6 @@ import static com.epam.anatolii.ageev.constants.WebConstant.USER_SERVICE;
 public class Login extends HttpServlet {
     final static Logger LOG = Logger.getLogger(Login.class);
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.debug(getClass() + " doGet() started");
@@ -53,8 +52,6 @@ public class Login extends HttpServlet {
             LOG.debug(String.format("User from db ==> %s", user));
             if (Objects.equals(user.getPassword(), password)) {
                 req.getSession().setAttribute(LOGIN_USER, login);
-                resp.sendRedirect(req.getHeader("Referer"));
-                return;
             }
         }
         resp.sendRedirect(req.getHeader("Referer"));
