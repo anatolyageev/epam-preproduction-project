@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
-
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_FILTER_FORM_CATEGORY;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_FILTER_FORM_FIELD_SORT;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_FILTER_FORM_MAX_PRICE;
@@ -32,14 +31,17 @@ public class ProductRequestUtils {
         LOG.debug("ProductFilterBean : " + productFilterBean);
         setMinMaxPrice(request, productFilterBean);
         LOG.debug("ProductFilterBean : " + productFilterBean);
-        productFilterBean.setOffset(Integer.parseInt(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_PRODUCTS_OFFSET))
-                .orElse(PRODUCT_FILTER_FORM_PRODUCTS_DEFAULT_OFFSET)));
+        productFilterBean.setOffset(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_PRODUCTS_OFFSET))
+                .map(Integer::parseInt)
+                .orElse(PRODUCT_FILTER_FORM_PRODUCTS_DEFAULT_OFFSET));
         LOG.debug("ProductFilterBean : " + productFilterBean);
-        productFilterBean.setProductsPerPage(Integer.parseInt(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE))
-                .orElse(PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE_DEFAULT)));
+        productFilterBean.setProductsPerPage(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE))
+                .map(Integer::parseInt)
+                .orElse(PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE_DEFAULT));
         LOG.debug("ProductFilterBean : " + productFilterBean);
-        productFilterBean.setSortDirection(SortDirection.valueOf(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_SORT_DIRECTION))
-                .orElse(SortDirection.ASC.toString())));
+        productFilterBean.setSortDirection(Optional.ofNullable(request.getParameter(PRODUCT_FILTER_FORM_SORT_DIRECTION))
+                .map(SortDirection::valueOf)
+                .orElse(SortDirection.ASC));
         LOG.debug("ProductFilterBean : " + productFilterBean);
         productFilterBean.setSortByField(request.getParameter(PRODUCT_FILTER_FORM_FIELD_SORT));
         LOG.debug("ProductFilterBean : " + productFilterBean);

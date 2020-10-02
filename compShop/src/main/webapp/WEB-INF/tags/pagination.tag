@@ -4,8 +4,9 @@
 <div>
     <nav aria-label="Navigation for products">
         <ul class="pagination">
-            <c:if test="${currentPage != 1}">
-                <li class="page-item"><a class="page-link" href="${hrefForPagination}offset=${(currentPage-1-1)*productFilterBean.productsPerPage}&currentPage=${currentPage-1}">Previous</a>
+
+            <c:if test="${currentPage gt 1}">
+                <li class="page-item"><a class="page-link" href="${hrefForPagination}offset=${(currentPage-2)*productFilterBean.productsPerPage}&currentPage=${currentPage-1}">Previous</a>
                 </li>
             </c:if>
 
@@ -24,7 +25,7 @@
             </c:forEach>
 
             <c:if test="${currentPage lt noOfPages}">
-                <li class="page-item"><a class="page-link" href="${hrefForPagination}offset=${(currentPage+1-1)*productFilterBean.productsPerPage}&currentPage=${currentPage+1}">Next</a>
+                <li class="page-item"><a class="page-link" href="${hrefForPagination}offset=${(currentPage)*productFilterBean.productsPerPage}&currentPage=${currentPage+1}">Next</a>
                 </li>
             </c:if>
         </ul>

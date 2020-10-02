@@ -2,6 +2,8 @@
 <%@include file="/WEB-INF/jspf/jspInput.jspf" %>
 <%@include file="/WEB-INF/jspf/taglib.jspf" %>
 <%@ taglib uri="/WEB-INF/tld/custom-functions.tld" prefix="myfn" %>
+<%@ page import="com.epam.anatolii.ageev.constants.WebConstant" %>
+<%--<jsp:useBean id="cons" scope="session" type="com.epam.anatolii.ageev.constants.WebConstant"/>--%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +47,7 @@
             </ul>
         </div>
         <div>
+            <ul>${WebConstant.INT_ONE}</ul>
             <ul class="nav navbar-nav navbar-right">
                 <tgcp:login/>
             </ul>

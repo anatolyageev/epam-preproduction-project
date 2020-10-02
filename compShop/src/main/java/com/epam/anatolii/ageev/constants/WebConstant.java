@@ -53,12 +53,17 @@ public class WebConstant {
     public static final String PRODUCT_FILTER_FORM_SORT_DIRECTION = "sortDirection";
     public static final String PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE = "productsPerPage";
     public static final String PRODUCT_FILTER_FORM_PRODUCTS_OFFSET = "offset";
-    public static final String PRODUCT_FILTER_FORM_PRODUCTS_DEFAULT_OFFSET = "0";
-    public static final String PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE_DEFAULT = "10";
+    public static final Integer PRODUCT_FILTER_FORM_PRODUCTS_DEFAULT_OFFSET = 0;
+    public static final Integer PRODUCT_FILTER_FORM_PRODUCTS_PER_PAGE_DEFAULT = 10;
     public static final String NUMBER_OF_PAGES = "noOfPages";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String HREF_PAGINATION = "hrefForPagination";
 
     public static final String PRODUCERS_LIST = "producersList";
     public static final String CATEGORIES_LIST = "categoriesList";
+
+    //jsp constance
+    public static final Integer INT_ONE = 1;
+    public static final Integer INT_TWO = 2;
+
 }
