@@ -35,3 +35,26 @@ if (history.pushState) {
                               console.warn('History API не поддерживается');
                           }
     });
+
+
+    let add_to_cart = $(".add-to-cart");
+
+    add_to_cart.click(function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: "addToCart",
+            method: "POST",
+            data: ({productId: id}),
+            success: response
+        });
+    });
+
+$(document).ready(function () {
+    function response(data) {
+        data = JSON.parse(data);
+        var cartBadge = document.getElementById("cart-badge");
+        var newAmaunt = data.countCart;
+        cartBadge.innerText = cartBadge.textContent = newAmaunt;
+    }
+});
+

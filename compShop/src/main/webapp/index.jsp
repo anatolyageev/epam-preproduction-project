@@ -1,64 +1,11 @@
-<%@include file="/WEB-INF/jspf/format.jspf" %>
-<%@include file="/WEB-INF/jspf/jspInput.jspf" %>
-<%@include file="/WEB-INF/jspf/taglib.jspf" %>
-<%@ taglib uri="/WEB-INF/tld/custom-functions.tld" prefix="myfn" %>
 <%@ page import="com.epam.anatolii.ageev.constants.WebConstant" %>
-<%--<jsp:useBean id="cons" scope="session" type="com.epam.anatolii.ageev.constants.WebConstant"/>--%>
-<!DOCTYPE html>
-<html lang="en">
+<%@include file="/WEB-INF/jspf/head.jspf" %>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Shop Homepage - Start Bootstrap Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="styles/shop-homepage.css" rel="stylesheet">
-    <link href="styles/nav-bar.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/register/style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="js/products.js"></script>
 </head>
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registration">Register</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <ul>${WebConstant.INT_ONE}</ul>
-            <ul class="nav navbar-nav navbar-right">
-                <tgcp:login/>
-            </ul>
-        </div>
-    </div>
-</nav>
+<%@include file="/WEB-INF/jspf/navbar-bar.jspf" %>
 
 <!-- Page Content -->
 <div class="container">
@@ -161,12 +108,20 @@
                         <label for="productsPerPage">Per page :</label>
                         <select class="form-control" id="productsPerPage" name="productsPerPage"
                                 onchange="this.form.submit()">
-                            <option <c:if test="${productFilterBean.productsPerPage == 1}"> selected </c:if> >1</option>
-                            <option <c:if test="${productFilterBean.productsPerPage == 10}"> selected </c:if> >10
+                            <option <c:if
+                                    test="${productFilterBean.productsPerPage == WebConstant.INT_ONE}"> selected
+                            </c:if> >${WebConstant.INT_ONE}</option>
+                            <option <c:if
+                                    test="${productFilterBean.productsPerPage == WebConstant.INT_TEN}"> selected
+                            </c:if> >${WebConstant.INT_TEN}
                             </option>
-                            <option <c:if test="${productFilterBean.productsPerPage == 15}"> selected </c:if>>15
+                            <option <c:if
+                                    test="${productFilterBean.productsPerPage == WebConstant.INT_FIFTEEN}"> selected
+                            </c:if>>${WebConstant.INT_FIFTEEN}
                             </option>
-                            <option <c:if test="${productFilterBean.productsPerPage == 20}"> selected </c:if> >20
+                            <option <c:if
+                                    test="${productFilterBean.productsPerPage == WebConstant.INT_TWENTY}"> selected
+                            </c:if> >${WebConstant.INT_TWENTY}
                             </option>
                         </select>
                     </div>
@@ -197,6 +152,7 @@
 </div>
 <!-- /.container -->
 
+<<<<<<< HEAD
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -217,3 +173,6 @@
 </body>
 
 </html>
+=======
+<%@include file="/WEB-INF/jspf/footer.jspf" %>
+>>>>>>> 9161bfa... Added Cart, Order, ProductsInOrder beans

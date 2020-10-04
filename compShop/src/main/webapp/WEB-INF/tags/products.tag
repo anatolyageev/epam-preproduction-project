@@ -13,7 +13,7 @@
                     <p class="card-text">${product.shortDescription}</p>
                 </div>
                 <div class="card-footer">
-                    <button class="rounded btn-success " type="submit">To Cart</button>
+                    <button class="rounded btn-success add-to-cart" data-id="${product.id}" >To Cart</button>
                 </div>
             </div>
         </div>

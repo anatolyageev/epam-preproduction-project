@@ -89,7 +89,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `producer_id`, `name`, `short_description`, `price`, `image`, `meta_title`) VALUES
+INSERT INTO `products` (product_id, `category_id`, `producer_id`, `name`, `short_description`, `price`, `image`, `meta_title`) VALUES
 (1, 2, 1, 'Asus ZenBook S (UX391FA-AH010T)\r\n', '13,3\" / 1920x1080 / IPS / Intel Core i7-8565U, 1,8-4,6 ГГц / Intel UHD Graphics 620/ DDR3 / 16 ГБ / SSD - 512 GB/\r\n\r\n', '29999.00', 'img/products/ua_noutbuk_asus_zenbook_13_ux334fac_ux334fac-a3047t_noutbuk_asus_zenbook_13_ux334fac_ux334fac-a3047t_2500_1673.jpg', 'qq'),
 (2, 2, 1, 'Asus ZenBook UX325JA Grey (UX325JA-AH040T)', '13,3\" / 1920x1080 / Intel Core i7-1065G7, 1,3-3,9 ГГц / Intel Iris Plus Graphics / ОС - Windows 10 Home / DDR4 / 16 ГБ / SSD - 512 ГБ / Wi-Fi 802.11ax, Bluetooth', '39999.00', 'img/products/ua_noutbuk_asus_zenbook_s_ux391fa-ah010t_noutbuk_asus_zenbook_s_ux391fa-ah010t.jpg', 'qq'),
 (3, 2, 1, 'Asus ZenBook 13 UX333FLC (UX333FLC-A3153T)\r\n', '13,3\" / 1920x1080 / Intel Core i7-10510U, 1,8-4,9 ГГц / NVIDIA GeForce MX 250, 2 GB / DDR3 / 16 ГБ / SSD - 512 GB / Wi-Fi 802.11ax, Bluetooth / HDMI ', '38699.00', 'img/products/ua_noutbuk_asus_zenbook_ux325ja_grey_ux325ja-ah040t_noutbuk_asus_zenbook_ux325ja_grey_ux325ja-ah040t_1100_764.jpg', 'qq');
@@ -138,8 +138,8 @@ ALTER TABLE `producers`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
+  ADD PRIMARY KEY (product_id),
+  ADD UNIQUE KEY `id` (product_id);
 
 --
 -- Indexes for table `users`
@@ -168,7 +168,7 @@ ALTER TABLE `producers`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY product_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

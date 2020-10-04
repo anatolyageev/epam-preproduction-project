@@ -2,7 +2,8 @@ package com.epam.anatolii.ageev.constants.sql;
 
 public class Fields {
     public static final String ENTITY_ID = "id";
-    public static final String PRODUCT_ID = "product_id";
+    public static final String ENTITY_ID_PRODUCTS = "product_id";
+
 
     //User fields
     public static final String USER_LOGIN = "login";
