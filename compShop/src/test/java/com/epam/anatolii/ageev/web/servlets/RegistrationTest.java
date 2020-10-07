@@ -3,10 +3,12 @@ package com.epam.anatolii.ageev.web.servlets;
 import com.epam.anatolii.ageev.captcha.impl.SessionCaptchaServiceImpl;
 import com.epam.anatolii.ageev.domain.UserFromForm;
 import com.epam.anatolii.ageev.services.impl.UserServiceImpl;
+import com.epam.anatolii.ageev.web.utils.AvatarsUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.ServletConfig;
@@ -19,9 +21,17 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.epam.anatolii.ageev.constants.WebConstant.*;
+import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_STRATEGY;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_CAPTCHA;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_EMAIL;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_LAST_NAME;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_NAME;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_PASSWORD;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_SERVICE;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationTest {
@@ -40,6 +50,8 @@ public class RegistrationTest {
     private SessionCaptchaServiceImpl captchaService;
     @Mock
     private UserServiceImpl userService;
+
+
     private UserFromForm userFromForm;
     private UserFromForm userFromForm1;
     private Map<Long, String> captchaMap;
@@ -50,6 +62,7 @@ public class RegistrationTest {
         userFromForm1 = new UserFromForm("login8JK", "Petr", "Petrov", "mail@mail.com", "qaz2wSX3ed", "incorrect");
         captchaMap = new ConcurrentHashMap<>();
         captchaMap.put(123456L, "1qaz2wsx");
+        Mockito.mockStatic(AvatarsUtils.class);
 
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(CAPTCHA_STRATEGY)).thenReturn(captchaService);
@@ -58,6 +71,7 @@ public class RegistrationTest {
         when(captchaService.getTimeCreatedCaptcha(request)).thenReturn(123456L);
         when(request.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(USER_SERVICE)).thenReturn(userService);
+
     }
 
     @Test

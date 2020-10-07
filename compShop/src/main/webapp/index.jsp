@@ -1,6 +1,9 @@
 <%@include file="/WEB-INF/jspf/format.jspf" %>
 <%@include file="/WEB-INF/jspf/jspInput.jspf" %>
 <%@include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ taglib uri="/WEB-INF/tld/custom-functions.tld" prefix="myfn" %>
+<%@ page import="com.epam.anatolii.ageev.constants.WebConstant" %>
+<%--<jsp:useBean id="cons" scope="session" type="com.epam.anatolii.ageev.constants.WebConstant"/>--%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +22,11 @@
     <!-- Custom styles for this template -->
     <link href="styles/shop-homepage.css" rel="stylesheet">
     <link href="styles/nav-bar.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/register/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="js/products.js"></script>
 </head>
 
 <body>
@@ -44,6 +52,7 @@
             </ul>
         </div>
         <div>
+            <ul>${WebConstant.INT_ONE}</ul>
             <ul class="nav navbar-nav navbar-right">
                 <tgcp:login/>
             </ul>
@@ -58,11 +67,42 @@
 
         <div class="col-lg-3">
 
-            <h1 class="my-4">Shop Name</h1>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
+            <h1 class="my-4">Computer Shop</h1>
+            <br>
+
+            <label for="productName">Find by name:</label>
+            <input form="filterForm" id="productName" type="text" name="productName"
+                   value="${productFilterBean.productName}"><br>
+
+            <hr>
+            <div>Category</div>
+            <hr>
+            <div>
+                <c:forEach var="category" items="${categoriesList}">
+                    <input form="filterForm" type="checkbox" name="category" value="${category}"
+                    <c:if test="${myfn:contains(productFilterBean.categoryNames, category) }"> checked </c:if>
+                    > ${category}<br>
+                </c:forEach>
+            </div>
+            <hr>
+            <br>
+            <hr>
+            <div>Producer</div>
+            <hr>
+            <div>
+                <c:forEach var="producer" items="${producersList}">
+                    <input form="filterForm" type="checkbox" name="producer" value="${producer}"
+                           <c:if test="${myfn:contains(productFilterBean.producerNames,producer)}">checked </c:if>
+                    > ${producer}<br>
+                </c:forEach>
+            </div>
+            <hr>
+            <div id="price-filter">
+                Min price: <input form="filterForm" id="minPrice" type="number" name="minPrice"
+                                  value="${productFilterBean.priceMin}"><br>
+                Max price: <input form="filterForm" id="maxPrice" type="number" name="maxPrice"
+                                  value="${productFilterBean.priceMax}"><br><br>
+                <button form="filterForm" type="submit" class="btn btn-primary">Submit</button>
             </div>
 
         </div>
@@ -78,13 +118,13 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                        <img class="d-block img-fluid" src="<c:url value="/img/Laptop.jpg"/>" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                        <img class="d-block img-fluid" src="<c:url value="/img/Desktop.jpg"/>" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                        <img class="d-block img-fluid" src="<c:url value="/img/Server.jpg"/>" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -97,112 +137,56 @@
                 </a>
             </div>
 
-            <div class="row">
+            <div>
 
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item One</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
+                <form class="form-inline" id="filterForm" method="GET" action="products">
+                    <div class="form-group">
+                        <label for="sel1">Sort by:</label>
+                        <select class="form-control" id="sel1" name="fieldSort" onchange="this.form.submit()">
+                            <option <c:if test="${productFilterBean.sortByField == 'Name'}"> selected </c:if>  >Name
+                            </option>
+                            <option <c:if test="${productFilterBean.sortByField == 'Price'}"> selected </c:if> >Price
+                            </option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="sel2">Sort direction:</label>
+                        <select class="form-control" id="sel2" name="sortDirection" onchange="this.form.submit()">
+                            <option <c:if test="${productFilterBean.sortDirection == 'ASC'}"> selected </c:if> >ASC
+                            </option>
+                            <option <c:if test="${productFilterBean.sortDirection == 'DESC'}"> selected </c:if> >DESC
+                            </option>
+                        </select>
+                        <br>
+                        <label for="productsPerPage">Per page :</label>
+                        <select class="form-control" id="productsPerPage" name="productsPerPage"
+                                onchange="this.form.submit()">
+                            <option <c:if test="${productFilterBean.productsPerPage == 1}"> selected </c:if> >1</option>
+                            <option <c:if test="${productFilterBean.productsPerPage == 10}"> selected </c:if> >10
+                            </option>
+                            <option <c:if test="${productFilterBean.productsPerPage == 15}"> selected </c:if>>15
+                            </option>
+                            <option <c:if test="${productFilterBean.productsPerPage == 20}"> selected </c:if> >20
+                            </option>
+                        </select>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item Two</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur! Lorem ipsum dolor sit amet.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item Three</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item Four</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item Five</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur! Lorem ipsum dolor sit amet.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Item Six</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                                aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
+                </form>
             </div>
-            <!-- /.row -->
+            <c:choose>
+                <c:when test="${productList.size() gt 0}">
+
+                    <tgcp:pagination/>
+
+                    <tgcp:products/>
+
+                    <tgcp:pagination/>
+
+                </c:when>
+                <c:otherwise>
+                    <h1>No products found</h1>
+                </c:otherwise>
+            </c:choose>
 
         </div>
         <!-- /.col-lg-9 -->
@@ -223,16 +207,13 @@
 
 <!-- Bootstrap core JavaScript -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>
