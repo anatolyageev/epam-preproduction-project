@@ -7,31 +7,17 @@ import com.epam.anatolii.ageev.repository.ProductRepository;
 import com.epam.anatolii.ageev.repository.db.JdbcConnectionHolder;
 import com.epam.anatolii.ageev.repository.utils.JdbcUtils;
 import com.epam.anatolii.ageev.repository.utils.ProductFilterUtil;
+import org.apache.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
-
-import static com.epam.anatolii.ageev.constants.sql.Fields.CATEGORY_NAME;
-import static com.epam.anatolii.ageev.constants.sql.Fields.ENTITY_ID;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCER_NAME;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_CATEGORY_NAME;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_COUNT;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_IMAGE;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_META_TITLE;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_NAME;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_PRICE;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_PRODUCER_NAME;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_SHORT_DESCRIPTION;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ALL_CATEGORIES;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ALL_PRODUCERS;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ONE_PRODUCT;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_PRODUCT_GET_ALL;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_PRODUCT_GET_COUNT;
+import static com.epam.anatolii.ageev.constants.sql.Fields.*;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.*;
 
 public class ProductRepositoryImpl implements ProductRepository {
     final static Logger LOG = Logger.getLogger(ProductRepositoryImpl.class);
@@ -120,7 +106,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     private Product productFromResultSet(ResultSet rs) throws SQLException {
         Product product = new Product();
-        product.setId(rs.getLong(ENTITY_ID));
+        product.setId(rs.getLong(PRODUCT_ID));
         product.setName(rs.getString(PRODUCT_NAME));
         product.setCategory(rs.getString(PRODUCT_CATEGORY_NAME));
         product.setProducer(rs.getString(PRODUCT_PRODUCER_NAME));

@@ -1,9 +1,11 @@
 package com.epam.anatolii.ageev.repository.utils;
 
 import com.epam.anatolii.ageev.bean.ProductFilterBean;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.apache.log4j.Logger;
 
 import static com.epam.anatolii.ageev.constants.sql.Fields.DEFAULT_ORDER_PRODUCT_FIELD;
@@ -18,6 +20,7 @@ import static com.epam.anatolii.ageev.constants.sql.Fields.RIGHT_BRACKETS;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_AND;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_BETWEEN;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_COMMA;
+import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_EQUALS;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_IN;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_LIKE;
 import static com.epam.anatolii.ageev.constants.sql.Fields.SQL_LIKE_ANY;
@@ -39,7 +42,7 @@ public class ProductFilterUtil {
         StringBuilder sb = new StringBuilder();
 
         sb.append(Optional.of(addNameFilter()).orElse(""));
-        sb.append(Optional.of(addNames(PRODUCT_CATEGORY_NAME, productFilterBean.getCategoryNames() )).orElse(""));
+        sb.append(Optional.of(addNames(PRODUCT_CATEGORY_NAME, productFilterBean.getCategoryNames())).orElse(""));
         sb.append(Optional.of(addNames(PRODUCT_PRODUCER_NAME, productFilterBean.getProducerNames())).orElse(""));
         sb.append(Optional.of(addPriceFilter()).orElse(""));
         sb.append(addOrder());
@@ -53,7 +56,7 @@ public class ProductFilterUtil {
     private String addNameFilter() {
         StringBuilder sb = new StringBuilder();
         String nameFilter = productFilterBean.getProductName();
-        if (Objects.nonNull(nameFilter) && nameFilter.length()>0) {
+        if (Objects.nonNull(nameFilter) && nameFilter.length() > 0) {
             sb.append(checkFilterStatus());
             filterIsEmpty = false;
             sb.append(PRODUCT_NAME).append(SQL_LIKE).append(nameFilter).append(SQL_LIKE_ANY);
@@ -81,10 +84,18 @@ public class ProductFilterUtil {
         StringBuilder sb = new StringBuilder();
         if (Objects.nonNull(productFilterBean.getPriceMin()) && Objects.nonNull(productFilterBean.getPriceMax())) {
             sb.append(checkFilterStatus());
-            sb.append(PRODUCT_PRICE).append(SQL_BETWEEN).append(productFilterBean.getPriceMin())
-                    .append(SQL_AND)
-                    .append(productFilterBean.getPriceMax());
-            filterIsEmpty = false;
+
+            if (productFilterBean.getPriceMin() < productFilterBean.getPriceMax()) {
+                sb.append(PRODUCT_PRICE).append(SQL_BETWEEN).append(productFilterBean.getPriceMin())
+                        .append(SQL_AND)
+                        .append(productFilterBean.getPriceMax());
+                filterIsEmpty = false;
+            }
+
+            if (productFilterBean.getPriceMin().equals(productFilterBean.getPriceMax())) {
+                sb.append(PRODUCT_PRICE).append(SQL_EQUALS).append(productFilterBean.getPriceMax());
+                filterIsEmpty = false;
+            }
         }
         LOG.debug("Method addPriceFilter: " + sb.toString());
         return sb.toString();
@@ -101,14 +112,13 @@ public class ProductFilterUtil {
         return sb.toString();
     }
 
-    private String addLimit(){
+    private String addLimit() {
         StringBuilder sb = new StringBuilder();
-        if(Objects.nonNull(productFilterBean.getProductsPerPage()) && Objects.nonNull(productFilterBean.getOffset())){
+        if (Objects.nonNull(productFilterBean.getProductsPerPage()) && Objects.nonNull(productFilterBean.getOffset())) {
             sb.append(SQL_LIMIT).append(productFilterBean.getOffset())
                     .append(SQL_COMMA)
                     .append(productFilterBean.getProductsPerPage());
-        }
-        else {
+        } else {
             sb.append(SQL_LIMIT)
                     .append(DEFAULT_PRODUCT_OFFSET)
                     .append(SQL_COMMA)

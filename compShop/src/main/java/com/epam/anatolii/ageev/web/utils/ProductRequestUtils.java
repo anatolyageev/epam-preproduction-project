@@ -86,8 +86,11 @@ public class ProductRequestUtils {
         } catch (NumberFormatException ex) {
             LOG.debug("Incorrect data");
         }
+        if(max==0){
+            return;
+        }
         LOG.debug("Incorrect data: " + min + "  " + max);
-        if (min < max) {
+        if (min <= max ) {
             productFilterBean.setPriceMin(min);
             productFilterBean.setPriceMax(max);
         }

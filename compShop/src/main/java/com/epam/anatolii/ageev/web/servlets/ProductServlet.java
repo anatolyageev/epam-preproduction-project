@@ -3,9 +3,12 @@ package com.epam.anatolii.ageev.web.servlets;
 import com.epam.anatolii.ageev.bean.ProductFilterBean;
 import com.epam.anatolii.ageev.domain.Product;
 import com.epam.anatolii.ageev.services.ProductService;
+import com.epam.anatolii.ageev.web.utils.PrettyFacesWrappedRequest;
 import com.epam.anatolii.ageev.web.utils.ProductRequestUtils;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +34,7 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ProductFilterBean productFilterBean = ProductRequestUtils.filterFromRequest(req);
         LOG.debug("Filter been: " + productFilterBean);
         String currentPage = req.getParameter(CURRENT_PAGE);
