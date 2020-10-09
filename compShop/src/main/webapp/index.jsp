@@ -24,7 +24,7 @@
             <hr>
             <div>Category</div>
             <hr>
-            <div>
+            <div>filterForm
                 <c:forEach var="category" items="${categoriesList}">
                     <input form="filterForm" type="checkbox" name="category" value="${category}"
                     <c:if test="${myfn:contains(productFilterBean.categoryNames, category) }"> checked </c:if>
@@ -152,27 +152,4 @@
 </div>
 <!-- /.container -->
 
-<<<<<<< HEAD
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
-<!-- Bootstrap core JavaScript -->
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
-=======
 <%@include file="/WEB-INF/jspf/footer.jspf" %>
->>>>>>> 9161bfa... Added Cart, Order, ProductsInOrder beans

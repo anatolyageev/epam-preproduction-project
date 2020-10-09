@@ -32,6 +32,7 @@ public class OrderRepositoryImpl implements OrderRepository {
                 }
             }
         } catch (SQLException throwables) {
+            LOG.error("Cannot create user from the database. createOrder " + throwables );
             throw new DBException("Cannot create user from the database.", throwables);
         } finally {
             JdbcUtils.closeResultSet(rs);
@@ -44,6 +45,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             injectParametersToPreparedStatementProductOrder(productsInOrder, ps);
            ps.executeUpdate();
         } catch (SQLException throwables) {
+            LOG.error("Cannot create user from the database. addProductsInOrder" + throwables );
             throw new DBException("Cannot create user from the database.", throwables);
         }
         return productsInOrder;

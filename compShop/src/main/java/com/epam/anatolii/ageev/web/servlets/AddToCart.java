@@ -4,8 +4,11 @@ import com.epam.anatolii.ageev.domain.Cart;
 import com.epam.anatolii.ageev.domain.Product;
 import com.epam.anatolii.ageev.services.ProductService;
 import com.google.gson.JsonObject;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.ServletException;
@@ -16,13 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
-
 import static com.epam.anatolii.ageev.constants.WebConstant.CART;
+import static com.epam.anatolii.ageev.constants.WebConstant.CART_PRODUCT_ID;
+import static com.epam.anatolii.ageev.constants.WebConstant.CART_PRODUCT_PRICE;
+import static com.epam.anatolii.ageev.constants.WebConstant.CART_TOTAL_PRICE;
+import static com.epam.anatolii.ageev.constants.WebConstant.EQUAL;
+import static com.epam.anatolii.ageev.constants.WebConstant.INT_ONE;
+import static com.epam.anatolii.ageev.constants.WebConstant.LOGIN_USER;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_COUNT_CART;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_ID;
+import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_NUMBER;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_SERVICE;
-import static com.epam.anatolii.ageev.constants.sql.Fields.ENTITY_ID_PRODUCTS;
-import static com.epam.anatolii.ageev.constants.sql.Fields.PRODUCT_COUNT;
 
 @WebServlet("/addToCart")
 public class AddToCart extends HttpServlet {
@@ -32,34 +39,67 @@ public class AddToCart extends HttpServlet {
 
        HttpSession session = req.getSession();
         Cart cart = (Cart)Optional.ofNullable(session.getAttribute(CART)).orElse(new Cart());
-        LOG.debug("Cart: " + cart);
+
         ProductService productService = (ProductService) req.getServletContext().getAttribute(PRODUCT_SERVICE);
         PrintWriter pw = resp.getWriter();
         JsonObject jsonObject = new JsonObject();
         String productId = req.getParameter(PRODUCT_ID);
-     //   String productCount = req.getParameter(PRODUCT_COUNT_CART);
-        LOG.debug("ProductID: " + productId);
+        String newProductNumber = req.getParameter(PRODUCT_NUMBER);
         if(Objects.isNull(productId)){
-            pw.write(jsonObject.toString());
-            pw.close();
+            writerClose(pw, jsonObject);
             return;
         }
 
         Product addedProduct = productService.getOne(Long.parseLong(productId));
-        LOG.debug("eaquals; " + productService.getOne(1L).equals(productService.getOne(1L)) );
 
         if(cart.isProductPresent(addedProduct)){
-            Integer currentAmount = cart.getAmountOfProduct(addedProduct);
-            cart.addProductToCart(addedProduct,++currentAmount);
+            if(Objects.isNull(newProductNumber)) {
+                Integer currentAmount = cart.getAmountOfProduct(addedProduct);
+                cart.addProductToCart(addedProduct, ++currentAmount);
+            }else{
+                cart.addProductToCart(addedProduct, Integer.parseInt(newProductNumber));
+            }
+
         }else {
-            cart.addProductToCart(addedProduct, 1);
+            cart.addProductToCart(addedProduct, INT_ONE);
         }
-        session.setAttribute(CART, cart);
-        session.setAttribute(PRODUCT_COUNT_CART,cart.getProductsNumber());
-        jsonObject.addProperty(PRODUCT_COUNT_CART,cart.getProductsNumber());
-        LOG.debug("jsonObj: " + jsonObject.toString());
+        fillSessionAndJson(session, cart, jsonObject, addedProduct);
+        writerClose(pw, jsonObject);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Cart cart = (Cart)session.getAttribute(CART);
+        ProductService productService = (ProductService) req.getServletContext().getAttribute(PRODUCT_SERVICE);
+        PrintWriter pw = resp.getWriter();
+        JsonObject jsonObject = new JsonObject();
+        String productId;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
+            String jsonObj = br.readLine();
+            productId = jsonObj.split(EQUAL)[INT_ONE];
+        }
+        Product deletedProduct = productService.getOne(Long.parseLong(productId));
+        cart.deleteProduct(deletedProduct);
+        fillSessinAdnJsoneDelete(session, cart, jsonObject, deletedProduct);
+        writerClose(pw, jsonObject);
+    }
+
+    private void writerClose(PrintWriter pw, JsonObject jsonObject) {
         pw.write(jsonObject.toString());
         pw.close();
     }
 
+    private void fillSessinAdnJsoneDelete(HttpSession session, Cart cart, JsonObject jsonObject, Product deletedProduct) {
+        session.setAttribute(CART, cart);
+        session.setAttribute(PRODUCT_COUNT_CART, cart.getProductsNumber());
+        jsonObject.addProperty(PRODUCT_COUNT_CART, cart.getProductsNumber());
+        jsonObject.addProperty(CART_TOTAL_PRICE, cart.getTotalPrice());
+        jsonObject.addProperty(CART_PRODUCT_ID, deletedProduct.getId());
+    }
+
+    private void fillSessionAndJson(HttpSession session, Cart cart, JsonObject jsonObject, Product product) {
+        fillSessinAdnJsoneDelete(session, cart, jsonObject, product);
+        jsonObject.addProperty(CART_PRODUCT_PRICE, product.getPrice().multiply(BigDecimal.valueOf(cart.getAmountOfProduct(product))));
+    }
 }

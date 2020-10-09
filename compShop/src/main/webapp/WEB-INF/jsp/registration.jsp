@@ -12,7 +12,8 @@
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous">
     </script>
-
+<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"--%>
+<%--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">--%>
     <link rel="stylesheet" href="././styles/register/style.css">
 </head>
 <body>
@@ -28,11 +29,17 @@
                 Error:  ${sessionScope.error_message}
             </c:if></div>
         </div>
-        <form id="login" class="input-group">
-            <input type="text" class="input-field" placeholder="User Id" required>
-            <input type="text" class="input-field" placeholder="Enter Password" required>
+        <form id="login" class="input-group" action="login" method="post">
+            <input type="text" class="input-field" placeholder="Username" name="userId" required>
+            <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
             <input type="checkbox" class="check-box"><span class="span-login">Remember Password</span>
             <button type="submit" class="submit-btn">Log in</button>
+            <div id="return-cart">    <c:if test="${not empty loginUser}">
+                <div class="col-sm-12  col-md-4 text-center">
+                    <a href="cart" class="btn-cart">Continue Purchase</a>
+                </div>
+        </c:if></div>
+
         </form>
 
         <form id="register" class="input-group input-group-register" action="registration" onsubmit="return validate();" method="post" enctype="multipart/form-data">
@@ -57,6 +64,8 @@
 
 </div>
 
+
+<%@include file="/WEB-INF/jspf/bootstrapFooter.jspf" %>
 <script src="././js/registrationForm.js"></script>
 <script src="././js/VanillaJSValidation.js"></script>
 <script src="././js/JQueryValidation.js"></script>

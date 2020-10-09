@@ -7,6 +7,7 @@ public class WebConstant {
 
     public static final String USER_SERVICE = "userService";
     public static final String PRODUCT_SERVICE = "productService";
+    public static final String ORDER_SERVICE = "orderService";
     public static final String CAPTCHA_STRATEGY = "captchaStrategy";
 
     //Register constants
@@ -69,8 +70,19 @@ public class WebConstant {
     public static final Integer INT_TEN = 10;
     public static final Integer INT_FIFTEEN = 15;
     public static final Integer INT_TWENTY = 20;
+    public static final String EQUAL = "=";
+
 
     public static final String CART = "cart";
+    public static final String ORDER = "order";
+
     public static final String PRODUCT_ID = "productId";
     public static final String PRODUCT_COUNT_CART = "countCart";
+    public static final String PRODUCT_NUMBER = "productNumber";
+
+    public static final String CART_TOTAL_PRICE = "totalPrice";
+    public static final String CART_PRODUCT_ID = "productId";
+    public static final String CART_PRODUCT_PRICE = "productPrice";
+
+    public static final String REQUISITES_INPUT = "requisitesInput";
 }

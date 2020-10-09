@@ -6,9 +6,11 @@ import java.util.List;
 public class Order extends LongID {
 private OrderStatus orderStatus;
 private String statusDetails;
+private String requisites;
 private LocalDateTime orderDateTime;
 private List<ProductsInOrder> userOrder;
 private Long userId;
+
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
@@ -48,5 +50,26 @@ private Long userId;
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getRequisites() {
+        return requisites;
+    }
+
+    public void setRequisites(String requisites) {
+        this.requisites = requisites;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderStatus=" + orderStatus +
+                ", statusDetails='" + statusDetails + '\'' +
+                ", requisites='" + requisites + '\'' +
+                ", orderDateTime=" + orderDateTime +
+                ", userOrder=" + userOrder +
+                ", userId=" + userId +
+                ", id=" + id +
+                '}';
     }
 }

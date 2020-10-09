@@ -11,10 +11,8 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 public class ProductServiceImpl implements ProductService {
-    final static Logger LOG = Logger.getLogger(ProductServiceImpl.class);
-
-    private ProductRepository productRepository;
-    private TransactionManager transactionManager;
+    private final ProductRepository productRepository;
+    private final TransactionManager transactionManager;
 
     public ProductServiceImpl(ProductRepository productRepository, DataSource dataSource) {
         this.transactionManager = new TransactionManagerImpl(dataSource);
@@ -38,11 +36,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<String> getAllProducers() {
-        return transactionManager.executeDqlTransaction(() -> productRepository.getAllProducers());
+        return transactionManager.executeDqlTransaction(productRepository::getAllProducers);
     }
 
     @Override
     public List<String> getAllCategories() {
-        return transactionManager.executeDqlTransaction(() -> productRepository.getAllCategories());
+        return transactionManager.executeDqlTransaction(productRepository::getAllCategories);
     }
 }

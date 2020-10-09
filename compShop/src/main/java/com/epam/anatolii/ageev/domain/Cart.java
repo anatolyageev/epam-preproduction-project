@@ -1,13 +1,17 @@
 package com.epam.anatolii.ageev.domain;
 
+import com.epam.anatolii.ageev.web.servlets.AddToCart;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 
 public class Cart {
+    final static Logger LOG = Logger.getLogger(Cart.class);
     private final Map<Product, Integer> cartStorage;
 
     public Cart() {
@@ -15,34 +19,46 @@ public class Cart {
     }
 
     public Product addProductToCart(Product product, int amount) {
-       cartStorage.put(product, amount);
-       return product;
+        cartStorage.put(product, amount);
+        return product;
     }
 
-    public void deleteProduct(Product product){
+    public void deleteProduct(Product product) {
         cartStorage.remove(product);
     }
 
-    public Set<Product> getProductsList(){
+    public Set<Product> getProductsList() {
         return cartStorage.keySet();
     }
 
-    public Integer getProductsNumber(){
+    public List<ProductsInOrder> getProductsInOrder() {
+        List<ProductsInOrder> productsInOrderList = new ArrayList<>();
+        cartStorage.forEach((key, value) -> {
+            ProductsInOrder productsInOrder = new ProductsInOrder();
+            productsInOrder.setProductPrice(key.getPrice());
+            productsInOrder.setProductId(key.getId());
+            productsInOrder.setNumberInOrder(value);
+            productsInOrderList.add(productsInOrder);
+        });
+        return productsInOrderList;
+    }
+
+    public Integer getProductsNumber() {
         return cartStorage.values().stream().reduce(0, Integer::sum);
     }
 
-    public BigDecimal getTotalPrice(){
+    public BigDecimal getTotalPrice() {
         return cartStorage.entrySet()
                 .stream()
                 .map(es -> es.getKey().getPrice().multiply(new BigDecimal(es.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public boolean isProductPresent(Product product){
+    public boolean isProductPresent(Product product) {
         return cartStorage.containsKey(product);
     }
 
-    public Integer getAmountOfProduct(Product product){
+    public Integer getAmountOfProduct(Product product) {
         return cartStorage.get(product);
     }
 
