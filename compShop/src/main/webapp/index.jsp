@@ -17,14 +17,14 @@
             <h1 class="my-4">Computer Shop</h1>
             <br>
 
-            <label for="productName">Find by name:</label>
+            <label for="productName"><fmt:message key="find.by.name"/>:</label>
             <input form="filterForm" id="productName" type="text" name="productName"
                    value="${productFilterBean.productName}"><br>
 
             <hr>
-            <div>Category</div>
+            <div><fmt:message key="category"/></div>
             <hr>
-            <div>filterForm
+            <div>
                 <c:forEach var="category" items="${categoriesList}">
                     <input form="filterForm" type="checkbox" name="category" value="${category}"
                     <c:if test="${myfn:contains(productFilterBean.categoryNames, category) }"> checked </c:if>
@@ -34,7 +34,7 @@
             <hr>
             <br>
             <hr>
-            <div>Producer</div>
+            <div><fmt:message key="producer"/></div>
             <hr>
             <div>
                 <c:forEach var="producer" items="${producersList}">
@@ -45,9 +45,9 @@
             </div>
             <hr>
             <div id="price-filter">
-                Min price: <input form="filterForm" id="minPrice" type="number" name="minPrice"
+                <fmt:message key="min.price"/>: <input form="filterForm" id="minPrice" type="number" name="minPrice"
                                   value="${productFilterBean.priceMin}"><br>
-                Max price: <input form="filterForm" id="maxPrice" type="number" name="maxPrice"
+                <fmt:message key="max.price"/>: <input form="filterForm" id="maxPrice" type="number" name="maxPrice"
                                   value="${productFilterBean.priceMax}"><br><br>
                 <button form="filterForm" type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -90,7 +90,7 @@
                     <div class="form-group">
                         <label for="sel1">Sort by:</label>
                         <select class="form-control" id="sel1" name="fieldSort" onchange="this.form.submit()">
-                            <option <c:if test="${productFilterBean.sortByField == 'Name'}"> selected </c:if>  >Name
+                            <option <c:if test="${productFilterBean.sortByField == 'Name'}"> selected </c:if> >Name
                             </option>
                             <option <c:if test="${productFilterBean.sortByField == 'Price'}"> selected </c:if> >Price
                             </option>
@@ -139,7 +139,7 @@
 
                 </c:when>
                 <c:otherwise>
-                    <h1>No products found</h1>
+                    <h1><fmt:message key="no.products.found"/></h1>
                 </c:otherwise>
             </c:choose>
 

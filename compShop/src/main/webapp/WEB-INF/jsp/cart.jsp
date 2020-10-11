@@ -13,7 +13,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Your Cart</h1>
+        <h1 class="jumbotron-heading"><fmt:message key="your.cart"/></h1>
     </div>
 </section>
 
@@ -24,10 +24,10 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Product</th>
+                        <th scope="col"><fmt:message key="product"/></th>
 
-                        <th scope="col" class="text-center">Quantity</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col" class="text-center"><fmt:message key="quantity"/></th>
+                        <th scope="col" class="text-right"><fmt:message key="price"/></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -59,7 +59,7 @@
                         <td></td>
 
                         <td></td>
-                        <td><strong>Total</strong></td>
+                        <td><strong><fmt:message key="total"/></strong></td>
                         <td class="text-right"><strong id="total-price">${cart.getTotalPrice()}</strong></td>
                     </tr>
                     </tbody>
@@ -69,13 +69,13 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-4 text-center">
-                    <a href="products" class="btn-lg btn-block btn-info">Continue Shopping</a>
+                    <a href="products" class="btn-lg btn-block btn-info"><fmt:message key="continue.shopping"/></a>
                 </div>
                 <div class="col-sm-12  col-md-4 text-center">
-                    <button onclick="deleteAllProduct()" class="btn-lg btn-block btn-danger">Clear Cart</button>
+                    <button onclick="deleteAllProduct()" class="btn-lg btn-block btn-danger"><fmt:message key="clear.cart"/></button>
                 </div>
                 <div class="col-sm-12 col-md-4 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase" onclick="makeOrder(${not empty loginUser})">Checkout</button>
+                    <button class="btn btn-lg btn-block btn-success text-uppercase" onclick="makeOrder(${not empty loginUser})"><fmt:message key="checkout"/></button>
                 </div>
             </div>
         </div>

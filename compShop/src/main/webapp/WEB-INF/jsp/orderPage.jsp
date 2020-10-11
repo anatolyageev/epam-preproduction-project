@@ -10,7 +10,7 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Order</h1>
+        <h1 class="jumbotron-heading"><fmt:message key="order"/></h1>
     </div>
 </section>
 
@@ -21,9 +21,9 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Product</th>
-                        <th scope="col" class="text-center">Quantity</th>
-                        <th scope="col" class="text-right">Price</th>
+                        <th scope="col"><fmt:message key="product"/></th>
+                        <th scope="col" class="text-center"><fmt:message key="quantity"/></th>
+                        <th scope="col" class="text-right"><fmt:message key="price"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,7 @@
                     </c:forEach>
                     <tr>
                         <td></td>
-                        <td><strong>Total</strong></td>
+                        <td><strong><fmt:message key="total"/></strong></td>
                         <td class="text-right"><strong id="total-price">${cart.getTotalPrice()}</strong></td>
                     </tr>
                     </tbody>
@@ -51,7 +51,7 @@
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Addition information for order</legend>
+                    <legend><fmt:message key="addition.information.for.order"/></legend>
 
                     <!-- Text input-->
                     <div class="form-group">
@@ -63,33 +63,17 @@
                     <div class="row">
 
                         <div class="col-sm-12  col-md-4 text-center">
-                            <a href="products" class="btn-lg btn-block btn-info">Continue Shopping</a>
+                            <a href="products" class="btn-lg btn-block btn-info"><fmt:message key="continue.shopping"/></a>
                         </div>
 
                         <div class="col-sm-12 col-md-4 text-right">
                             <button class="btn btn-lg btn-block btn-success text-uppercase" type="submit"
-                                    >Make an Order
+                                    ><fmt:message key="make.an.order"/>
                             </button>
                         </div>
                     </div>
                 </fieldset>
             </form>
-
-
-<%--            <div class="row">--%>
-
-
-
-<%--                <div class="col-sm-12  col-md-4 text-center">--%>
-<%--                    <a href="products" class="btn-lg btn-block btn-info">Continue Shopping</a>--%>
-<%--                </div>--%>
-
-<%--                <div class="col-sm-12 col-md-4 text-right">--%>
-<%--                    <button class="btn btn-lg btn-block btn-success text-uppercase"--%>
-<%--                            onclick="makeOrder(${loginUser})">Make an Order--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         </div>
     </div>
 </div>

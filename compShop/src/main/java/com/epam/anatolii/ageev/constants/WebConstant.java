@@ -85,4 +85,18 @@ public class WebConstant {
     public static final String CART_PRODUCT_PRICE = "productPrice";
 
     public static final String REQUISITES_INPUT = "requisitesInput";
+
+    //filter
+    public static final String LOCALE_DEFAULT = "localeDefault";
+    public static final String LOCALE_PARAMETERS = "localeParameters";
+    public static final String LOCALE_STORAGE = "localeStorage";
+    public static final String COOKIE_AGE = "cookieAge";
+    public static final String LOCALE = "locale";
+    public static final String URL = "url";
+
+    public static final String ACCEPT_ENCODING = "Accept-Encoding";
+    public static final String CONTENT_ENCODING = "Content-Encoding";
+    public static final String GZIP ="gzip";
+
+    public static final int COOKIE_AGE_FOR_TEST = 3600;
 }
