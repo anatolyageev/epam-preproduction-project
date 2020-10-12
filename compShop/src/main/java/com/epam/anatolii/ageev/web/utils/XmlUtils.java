@@ -21,6 +21,15 @@ import static com.epam.anatolii.ageev.constants.Messages.XML_CANNOT_BE_PARSED;
 
 public class XmlUtils {
     final static Logger LOG = Logger.getLogger(XmlUtils.class);
+
+    public static void main(String[] args) {
+        Map<String, List<String>> urlMap =  securityXMLParse("compShop/src/main/resources/security.xml");
+        urlMap.entrySet().forEach(es->{
+            System.out.println(es.getKey() + ": ");
+            es.getValue().forEach(p -> System.out.println(p + ", "));
+        });
+    }
+
     public static Map<String, List<String>> securityXMLParse(String path) {
         Map<String, List<String>> urlMap = new HashMap<>();
         LOG.debug("Path: " + path);
@@ -48,7 +57,7 @@ public class XmlUtils {
 
     private static String getUrlPattern(Element element) {
         return element
-                .getElementsByTagName("url-pattern")
+                .getElementsByTagName("page")
                 .item(0)
                 .getTextContent();
     }

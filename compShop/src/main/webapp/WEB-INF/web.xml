@@ -14,10 +14,10 @@
         <param-name>captchaType</param-name>
         <param-value>cookie</param-value>
     </context-param>
-<!--    <context-param>-->
-<!--        <param-name>securityFile</param-name>-->
-<!--        <param-value>./resource/security.xml</param-value>-->
-<!--    </context-param>-->
+    <context-param>
+        <param-name>securityFile</param-name>
+        <param-value>compShop/src/main/resources/security.xml</param-value>
+    </context-param>
     <filter>
         <filter-name>LocaleFilter</filter-name>
         <filter-class>com.epam.anatolii.ageev.web.filter.LocaleFilter</filter-class>
@@ -76,10 +76,10 @@
         <servlet-name>Products</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
-<!--    <error-page>-->
-<!--        <error-code>403</error-code>-->
-<!--        <location>/WEB-INF/jsp/accessDenied.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/jsp/accessDenied.jsp</location>
+    </error-page>
 </web-app>
 
 
