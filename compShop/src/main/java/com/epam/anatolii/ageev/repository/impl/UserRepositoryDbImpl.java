@@ -1,6 +1,7 @@
 package com.epam.anatolii.ageev.repository.impl;
 
 import com.epam.anatolii.ageev.domain.User;
+import com.epam.anatolii.ageev.domain.UserRole;
 import com.epam.anatolii.ageev.exeptions.DBException;
 import com.epam.anatolii.ageev.repository.UserRepository;
 import com.epam.anatolii.ageev.repository.db.JdbcConnectionHolder;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_ROLE;
 import static com.epam.anatolii.ageev.constants.sql.Fields.ENTITY_ID;
 import static com.epam.anatolii.ageev.constants.sql.Fields.USER_EMAIL;
 import static com.epam.anatolii.ageev.constants.sql.Fields.USER_FIRST_NAME;
@@ -23,7 +26,7 @@ import static com.epam.anatolii.ageev.constants.sql.Fields.USER_LOGIN;
 import static com.epam.anatolii.ageev.constants.sql.Fields.USER_PASSWORD;
 import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_DELETE_USER;
 import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ALL;
-import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GEY_ONE;
+import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_GET_ONE;
 import static com.epam.anatolii.ageev.constants.sql.SqlQuery.SQL_INSERT_USER;
 
 
@@ -48,7 +51,7 @@ public class UserRepositoryDbImpl implements UserRepository {
     @Override
     public User getOne(String login) {
         ResultSet rs = null;
-        try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_GEY_ONE)) {
+        try (PreparedStatement ps = JdbcConnectionHolder.getConnection().prepareStatement(SQL_GET_ONE)) {
             ps.setString(1, login);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -89,6 +92,7 @@ public class UserRepositoryDbImpl implements UserRepository {
             ps.setString(index++, user.getLastName());
             ps.setString(index++, user.getEmail());
             ps.setString(index++, user.getPassword());
+            ps.setString(index++, user.getUserRole().toString().toLowerCase());
             if (ps.executeUpdate() > 0) {
                 rs = ps.getGeneratedKeys();
                 if (Objects.nonNull(rs) && rs.next()) {
@@ -117,6 +121,7 @@ public class UserRepositoryDbImpl implements UserRepository {
         user.setLastName(rs.getString(USER_LAST_NAME));
         user.setEmail(rs.getString(USER_EMAIL));
         user.setPassword(rs.getString(USER_PASSWORD));
+        user.setUserRole(UserRole.valueOf(rs.getString(USER_ROLE).toUpperCase()));
         return user;
     }
 }

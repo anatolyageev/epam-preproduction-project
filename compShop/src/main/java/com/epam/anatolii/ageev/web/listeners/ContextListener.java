@@ -31,11 +31,14 @@ import org.apache.log4j.Logger;
 
 import static com.epam.anatolii.ageev.constants.DbConnectionConstants.DATA_SOURCE;
 import static com.epam.anatolii.ageev.constants.DbConnectionConstants.INIT_CONTEXT_LOOKUP;
+import static com.epam.anatolii.ageev.constants.WebConstant.ACCESS_SERVICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_STRATEGY;
 import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_TIME_OUT;
 import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_TIME_OUT_JOB_TIMEOUT;
 import static com.epam.anatolii.ageev.constants.WebConstant.ORDER_SERVICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_SERVICE;
+import static com.epam.anatolii.ageev.constants.WebConstant.SECURITY_FILE;
+import static com.epam.anatolii.ageev.constants.WebConstant.SECURITY_MAP;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_SERVICE;
 
 @WebListener
@@ -49,16 +52,20 @@ public class ContextListener implements ServletContextListener {
         String captchaTime = servletContextEvent.getServletContext().getInitParameter(CAPTCHA_TIME_OUT);
         LOG.debug("Captcha timeout: " + captchaTime);
         ServletContext servletContext = servletContextEvent.getServletContext();
+      //  Map<String, List<String>> securityMap = XmlUtils.securityXMLParse(servletContext.getInitParameter(SECURITY_FILE));
+     //   AccessService accessService = new AccessServiceImpl(securityMap);
         UserRepository userRepository = new UserRepositoryDbImpl();
         ProductRepository productRepository = new ProductRepositoryImpl();
         OrderRepository orderRepository = new OrderRepositoryImpl();
         DataSource dataSource = getDataSource();
         UserService userService = new UserServiceDbImpl(userRepository, dataSource);
         ProductService productService = new ProductServiceImpl(productRepository, dataSource);
-        OrderService orderService = new OrderServiceImpl(orderRepository,dataSource);
+        OrderService orderService = new OrderServiceImpl(orderRepository, dataSource);
         servletContext.setAttribute(USER_SERVICE, userService);
         servletContext.setAttribute(PRODUCT_SERVICE, productService);
         servletContext.setAttribute(ORDER_SERVICE, orderService);
+      //  servletContext.setAttribute(ACCESS_SERVICE, accessService);
+      //  servletContext.setAttribute(SECURITY_MAP, securityMap);
         CaptchaService captchaService = CaptchaServiceFactory.getCaptchaService(servletContextEvent.getServletContext());
         RemoveOldCaptcha removeOldCaptcha = new RemoveOldCaptcha(captchaService, Long.parseLong(captchaTime));
         scheduledExecutorService.scheduleWithFixedDelay(removeOldCaptcha, 0, CAPTCHA_TIME_OUT_JOB_TIMEOUT, TimeUnit.MILLISECONDS);

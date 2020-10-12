@@ -70,6 +70,7 @@ public class UserFromForm {
                 this.firstName,
                 this.lastName,
                 this.email,
-                this.password);
+                this.password,
+                 UserRole.USER);
     }
 }

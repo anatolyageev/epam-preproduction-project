@@ -18,6 +18,7 @@ import static com.epam.anatolii.ageev.constants.WebConstant.LOGIN_ERROR;
 import static com.epam.anatolii.ageev.constants.WebConstant.LOGIN_USER;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_PASSWORD;
+import static com.epam.anatolii.ageev.constants.WebConstant.USER_ROLE;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_SERVICE;
 
 @WebServlet("/login")
@@ -52,6 +53,7 @@ public class Login extends HttpServlet {
             LOG.debug(String.format("User from db ==> %s", user));
             if (Objects.equals(user.getPassword(), password)) {
                 req.getSession().setAttribute(LOGIN_USER, login);
+                req.getSession().setAttribute(USER_ROLE, user.getUserRole().toString());
             }
         }
         resp.sendRedirect(req.getHeader("Referer"));

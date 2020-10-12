@@ -4,6 +4,11 @@ public class WebConstant {
     //path
     public static final String MAIN_PAGE = "index.jsp";
     public static final String CART_PAGE = "WEB-INF/jsp/cart.jsp";
+    public static final String REGISTRATION_URL = "registration";
+
+
+    public static final String SECURITY_FILE = "securityFile";
+
 
     public static final String USER_SERVICE = "userService";
     public static final String PRODUCT_SERVICE = "productService";
@@ -22,6 +27,7 @@ public class WebConstant {
     public static final String LOGIN_ERROR = "error_message";
     public static final String LOGIN_USER = "loginUser";
     public static final String USER_AVATAR = "user_avatar";
+    public static final String USER_ROLE = "user_role";
 
     //Captcha
 
@@ -97,6 +103,11 @@ public class WebConstant {
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String CONTENT_ENCODING = "Content-Encoding";
     public static final String GZIP = "gzip";
+
+
+    public static final String ACCESS_SERVICE ="accessService";
+    public static final String SECURITY_MAP ="securityMap";
+    public static final String FROM_URL ="fromUrl";
 
     public static final int COOKIE_AGE_FOR_TEST = 3600;
 }

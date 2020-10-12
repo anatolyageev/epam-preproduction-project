@@ -10,4 +10,5 @@ public class Messages {
     public static final String TIMEOUT_USER_CAPTCHA = "Register page time out please update page";
     public static final String NO_USER_WITH_LOGIN = "Cannot find user with login: ";
     public static final String AVATAR_CANNOT_BE_SAVED = "Avatar file cannot be saved!";
+    public static final String XML_CANNOT_BE_PARSED = "xml cannot be parsed";
 }

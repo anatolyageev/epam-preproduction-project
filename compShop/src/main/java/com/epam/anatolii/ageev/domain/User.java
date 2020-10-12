@@ -9,17 +9,19 @@ public class User extends LongID {
     private String lastName;
     private Boolean userStatus;
     private String email;
+    private UserRole userRole;
 
     public User() {
     }
 
-    public User(String login, String firstName, String lastName, String email, String password) {
+    public User(String login, String firstName, String lastName, String email, String password, UserRole userRole) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userStatus = true;
+        this.userRole = userRole;
     }
 
     public String getLogin() {
@@ -68,6 +70,14 @@ public class User extends LongID {
 
     public void setUserStatus(Boolean userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override
