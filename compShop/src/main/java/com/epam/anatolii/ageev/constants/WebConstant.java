@@ -96,7 +96,7 @@ public class WebConstant {
 
     public static final String ACCEPT_ENCODING = "Accept-Encoding";
     public static final String CONTENT_ENCODING = "Content-Encoding";
-    public static final String GZIP ="gzip";
+    public static final String GZIP = "gzip";
 
     public static final int COOKIE_AGE_FOR_TEST = 3600;
 }

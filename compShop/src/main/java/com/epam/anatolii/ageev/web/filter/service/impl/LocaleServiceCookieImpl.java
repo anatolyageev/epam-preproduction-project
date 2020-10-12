@@ -1,6 +1,7 @@
 package com.epam.anatolii.ageev.web.filter.service.impl;
 
 import com.epam.anatolii.ageev.web.filter.service.LocaleService;
+
 import java.util.Locale;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import static com.epam.anatolii.ageev.constants.WebConstant.LOCALE;
 public class LocaleServiceCookieImpl implements LocaleService {
     private int cookiesAge;
 
-    public LocaleServiceCookieImpl(int cookiesAge){
+    public LocaleServiceCookieImpl(int cookiesAge) {
         this.cookiesAge = cookiesAge;
     }
 
@@ -26,7 +27,7 @@ public class LocaleServiceCookieImpl implements LocaleService {
     @Override
     public String getLocale(HttpServletRequest httpServletRequest) {
         Cookie[] cookies = httpServletRequest.getCookies();
-        if(cookies != null){
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(LOCALE)) {
                     return cookie.getValue();

@@ -5,6 +5,7 @@ import com.epam.anatolii.ageev.web.filter.service.LocaleService;
 import com.epam.anatolii.ageev.web.filter.service.impl.LocaleServiceCookieImpl;
 import com.epam.anatolii.ageev.web.filter.service.impl.LocaleServiceSessionImpl;
 import com.epam.anatolii.ageev.web.filter.wrappers.LocalizationWrapper;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -18,6 +19,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 
 
@@ -54,10 +56,10 @@ public class LocaleFilter implements Filter {
         LocalizationWrapper localizationWrapper;
         if (Objects.isNull(locale)) {
             locale = localeService.getLocale(httpServletRequest);
-            if(Objects.isNull(locale)){
+            if (Objects.isNull(locale)) {
                 locale = findMostPreferableLocale(httpServletRequest);
             }
-            if(Objects.isNull(locale)){
+            if (Objects.isNull(locale)) {
                 locale = getLocaleFromBrowser(httpServletRequest);
             }
 
@@ -78,7 +80,7 @@ public class LocaleFilter implements Filter {
 
     private String findMostPreferableLocale(HttpServletRequest httpServletRequest) {
         for (Locale locale : Collections.list(httpServletRequest.getLocales())) {
-            if(localeParams.contains(locale.toString())){
+            if (localeParams.contains(locale.toString())) {
                 return locale.toString();
             }
         }

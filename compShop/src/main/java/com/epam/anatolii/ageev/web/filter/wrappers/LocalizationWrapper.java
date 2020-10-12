@@ -1,19 +1,18 @@
 package com.epam.anatolii.ageev.web.filter.wrappers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
 
 public class LocalizationWrapper extends HttpServletRequestWrapper {
     private String locale;
 
-   public  LocalizationWrapper(HttpServletRequest request, String locale){
-       super(request);
-       this.locale = locale;
-   }
+    public LocalizationWrapper(HttpServletRequest request, String locale) {
+        super(request);
+        this.locale = locale;
+    }
 
     @Override
     public Locale getLocale() {

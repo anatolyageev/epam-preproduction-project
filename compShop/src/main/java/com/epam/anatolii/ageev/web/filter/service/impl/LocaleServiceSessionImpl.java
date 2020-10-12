@@ -1,6 +1,7 @@
 package com.epam.anatolii.ageev.web.filter.service.impl;
 
 import com.epam.anatolii.ageev.web.filter.service.LocaleService;
+
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
