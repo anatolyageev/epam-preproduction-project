@@ -73,7 +73,8 @@ public class Product extends LongID {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(name, product.name) &&
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
                 Objects.equals(shortDescription, product.shortDescription) &&
                 Objects.equals(price, product.price) &&
                 Objects.equals(image, product.image) &&
@@ -82,7 +83,7 @@ public class Product extends LongID {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, shortDescription, price, image, metaTitle);
+        return Objects.hash(id, name, shortDescription, price, image, metaTitle);
     }
 
     @Override

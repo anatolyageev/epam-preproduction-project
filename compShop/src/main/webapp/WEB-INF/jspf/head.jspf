@@ -1,0 +1,27 @@
+<%@include file="/WEB-INF/jspf/format.jspf" %>
+<%@include file="/WEB-INF/jspf/jspInput.jspf" %>
+<%@include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ taglib uri="/WEB-INF/tld/custom-functions.tld" prefix="myfn" %>
+
+<%--<jsp:useBean id="cons" scope="session" type="com.epam.anatolii.ageev.constants.WebConstant"/>--%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="<c:url value="/js/products.js"/>"></script>
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="<c:url value="/styles/shop-homepage.css"/>" rel="stylesheet">
+    <link href="<c:url value="/styles/nav-bar.css"/>" rel="stylesheet">
+

@@ -3,9 +3,11 @@ package com.epam.anatolii.ageev.constants;
 public class WebConstant {
     //path
     public static final String MAIN_PAGE = "index.jsp";
+    public static final String CART_PAGE = "WEB-INF/jsp/cart.jsp";
 
     public static final String USER_SERVICE = "userService";
     public static final String PRODUCT_SERVICE = "productService";
+    public static final String ORDER_SERVICE = "orderService";
     public static final String CAPTCHA_STRATEGY = "captchaStrategy";
 
     //Register constants
@@ -65,5 +67,22 @@ public class WebConstant {
     //jsp constance
     public static final Integer INT_ONE = 1;
     public static final Integer INT_TWO = 2;
+    public static final Integer INT_TEN = 10;
+    public static final Integer INT_FIFTEEN = 15;
+    public static final Integer INT_TWENTY = 20;
+    public static final String EQUAL = "=";
 
+
+    public static final String CART = "cart";
+    public static final String ORDER = "order";
+
+    public static final String PRODUCT_ID = "productId";
+    public static final String PRODUCT_COUNT_CART = "countCart";
+    public static final String PRODUCT_NUMBER = "productNumber";
+
+    public static final String CART_TOTAL_PRICE = "totalPrice";
+    public static final String CART_PRODUCT_ID = "productId";
+    public static final String CART_PRODUCT_PRICE = "productPrice";
+
+    public static final String REQUISITES_INPUT = "requisitesInput";
 }

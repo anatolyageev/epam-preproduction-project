@@ -12,4 +12,7 @@ public class SqlQuery {
 
     public static final String SQL_GET_ALL_PRODUCERS = "SELECT computer_shop.producers.producer_name FROM computer_shop.producers";
     public static final String SQL_GET_ALL_CATEGORIES = "SELECT computer_shop.categories.category_name FROM computer_shop.categories";
+
+    public static final String SQL_INSERT_ORDER = "INSERT INTO computer_shop.orders (order_status, status_details, order_date_time, user_id) VALUES(?,?,?,?)";
+    public static final String SQL_INSERT_PRODUCTS_ORDER = "INSERT INTO computer_shop.order_product (order_id, product_id, product_price, number_in_order) VALUES(?,?,?,?)";
 }
