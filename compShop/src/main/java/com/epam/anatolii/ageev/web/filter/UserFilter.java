@@ -1,10 +1,8 @@
 package com.epam.anatolii.ageev.web.filter;
 
-import com.epam.anatolii.ageev.constants.WebConstant;
 import com.epam.anatolii.ageev.domain.User;
 import com.epam.anatolii.ageev.services.UserService;
 import com.epam.anatolii.ageev.web.filter.service.AccessService;
-import com.epam.anatolii.ageev.web.servlets.Login;
 import java.io.IOException;
 import java.util.Objects;
 import javax.servlet.Filter;
@@ -29,19 +27,19 @@ public class UserFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse)response;
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession httpSession = httpServletRequest.getSession();
         String userLogin = (String) httpSession.getAttribute(USER_ID);
         String requestUrl = httpServletRequest.getRequestURI();
         AccessService accessService = (AccessService) httpServletRequest.getServletContext().getAttribute(ACCESS_SERVICE);
 
-        if(!accessService.isUrlPermitted(requestUrl)){
-            chain.doFilter(httpServletRequest,httpServletResponse);
+        if (!accessService.isUrlPermitted(requestUrl)) {
+            chain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
 
-        if(Objects.isNull(userLogin)){
+        if (Objects.isNull(userLogin)) {
             httpSession.setAttribute(FROM_URL, requestUrl);
             httpServletResponse.sendRedirect(REGISTRATION_URL);
             return;
@@ -50,8 +48,8 @@ public class UserFilter implements Filter {
         UserService userService = (UserService) httpServletRequest.getServletContext().getAttribute(USER_SERVICE);
         User user = userService.getOne(userLogin);
 
-        if(accessService.isAccessible(user.getUserRole(),requestUrl)){
-            chain.doFilter(httpServletRequest,httpServletResponse);
+        if (accessService.isAccessible(user.getUserRole(), requestUrl)) {
+            chain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
 

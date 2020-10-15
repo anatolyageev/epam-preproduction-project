@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+
 import static com.epam.anatolii.ageev.constants.WebConstant.SERVER_USER_DIR;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_AVATAR;
 

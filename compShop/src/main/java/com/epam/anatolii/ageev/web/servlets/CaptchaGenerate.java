@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
+
 import static com.epam.anatolii.ageev.constants.WebConstant.CAPTCHA_STRATEGY;
 
 @WebServlet("/img/captcha")

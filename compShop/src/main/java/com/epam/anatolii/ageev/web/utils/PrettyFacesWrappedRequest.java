@@ -1,17 +1,14 @@
 package com.epam.anatolii.ageev.web.utils;
 
-import com.epam.anatolii.ageev.web.servlets.ProductServlet;
-import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import org.apache.log4j.Logger;
 
 public class PrettyFacesWrappedRequest extends HttpServletRequestWrapper {
     final static Logger LOG = Logger.getLogger(PrettyFacesWrappedRequest.class);
@@ -42,15 +39,15 @@ public class PrettyFacesWrappedRequest extends HttpServletRequestWrapper {
         modifiableParameters.putAll(parameterMap);
     }
 
-    private List<String> removeNullParams(Map<String, String[]> parameterMap){
+    private List<String> removeNullParams(Map<String, String[]> parameterMap) {
         List<String> nullParam = new ArrayList<>();
 
-        for( Map.Entry<String, String[]> es:parameterMap.entrySet()){
-            if(Objects.isNull(es.getValue())){
+        for (Map.Entry<String, String[]> es : parameterMap.entrySet()) {
+            if (Objects.isNull(es.getValue())) {
                 nullParam.add(es.getKey());
             }
         }
-    return nullParam;
+        return nullParam;
     }
 
 }

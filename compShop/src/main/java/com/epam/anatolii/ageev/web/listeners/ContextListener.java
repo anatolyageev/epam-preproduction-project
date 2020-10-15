@@ -15,7 +15,9 @@ import com.epam.anatolii.ageev.services.UserService;
 import com.epam.anatolii.ageev.services.impl.OrderServiceImpl;
 import com.epam.anatolii.ageev.services.impl.ProductServiceImpl;
 import com.epam.anatolii.ageev.services.impl.UserServiceDbImpl;
-
+import com.epam.anatolii.ageev.web.filter.service.AccessService;
+import com.epam.anatolii.ageev.web.filter.service.impl.AccessServiceImpl;
+import com.epam.anatolii.ageev.web.utils.XmlUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -29,10 +31,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
-
-import com.epam.anatolii.ageev.web.filter.service.AccessService;
-import com.epam.anatolii.ageev.web.filter.service.impl.AccessServiceImpl;
-import com.epam.anatolii.ageev.web.utils.XmlUtils;
 import org.apache.log4j.Logger;
 
 

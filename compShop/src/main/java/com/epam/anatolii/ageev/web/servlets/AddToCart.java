@@ -19,13 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
+
 import static com.epam.anatolii.ageev.constants.WebConstant.CART;
 import static com.epam.anatolii.ageev.constants.WebConstant.CART_PRODUCT_ID;
 import static com.epam.anatolii.ageev.constants.WebConstant.CART_PRODUCT_PRICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.CART_TOTAL_PRICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.EQUAL;
 import static com.epam.anatolii.ageev.constants.WebConstant.INT_ONE;
-import static com.epam.anatolii.ageev.constants.WebConstant.LOGIN_USER;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_COUNT_CART;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_ID;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_NUMBER;
@@ -34,33 +34,34 @@ import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_SERVICE;
 @WebServlet("/addToCart")
 public class AddToCart extends HttpServlet {
     final static Logger LOG = Logger.getLogger(AddToCart.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-       HttpSession session = req.getSession();
-        Cart cart = (Cart)Optional.ofNullable(session.getAttribute(CART)).orElse(new Cart());
+        HttpSession session = req.getSession();
+        Cart cart = (Cart) Optional.ofNullable(session.getAttribute(CART)).orElse(new Cart());
 
         ProductService productService = (ProductService) req.getServletContext().getAttribute(PRODUCT_SERVICE);
         PrintWriter pw = resp.getWriter();
         JsonObject jsonObject = new JsonObject();
         String productId = req.getParameter(PRODUCT_ID);
         String newProductNumber = req.getParameter(PRODUCT_NUMBER);
-        if(Objects.isNull(productId)){
+        if (Objects.isNull(productId)) {
             writerClose(pw, jsonObject);
             return;
         }
 
         Product addedProduct = productService.getOne(Long.parseLong(productId));
 
-        if(cart.isProductPresent(addedProduct)){
-            if(Objects.isNull(newProductNumber)) {
+        if (cart.isProductPresent(addedProduct)) {
+            if (Objects.isNull(newProductNumber)) {
                 Integer currentAmount = cart.getAmountOfProduct(addedProduct);
                 cart.addProductToCart(addedProduct, ++currentAmount);
-            }else{
+            } else {
                 cart.addProductToCart(addedProduct, Integer.parseInt(newProductNumber));
             }
 
-        }else {
+        } else {
             cart.addProductToCart(addedProduct, INT_ONE);
         }
         fillSessionAndJson(session, cart, jsonObject, addedProduct);
@@ -70,7 +71,7 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Cart cart = (Cart)session.getAttribute(CART);
+        Cart cart = (Cart) session.getAttribute(CART);
         ProductService productService = (ProductService) req.getServletContext().getAttribute(PRODUCT_SERVICE);
         PrintWriter pw = resp.getWriter();
         JsonObject jsonObject = new JsonObject();

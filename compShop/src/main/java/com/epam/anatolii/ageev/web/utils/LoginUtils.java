@@ -2,7 +2,6 @@ package com.epam.anatolii.ageev.web.utils;
 
 import com.epam.anatolii.ageev.captcha.CaptchaService;
 import com.epam.anatolii.ageev.domain.UserFromForm;
-import com.epam.anatolii.ageev.exeptions.AvatarException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -14,11 +13,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
-import static com.epam.anatolii.ageev.constants.Messages.AVATAR_CANNOT_BE_SAVED;
+
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_CAPTCHA_VALUE;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_ID;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_LAST_NAME;
@@ -27,7 +25,6 @@ import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_NAME;
 import static com.epam.anatolii.ageev.constants.Messages.INVALID_USER_PASSWORD;
 import static com.epam.anatolii.ageev.constants.Messages.TIMEOUT_USER_CAPTCHA;
 import static com.epam.anatolii.ageev.constants.WebConstant.REGISTER_ERROR;
-import static com.epam.anatolii.ageev.constants.WebConstant.USER_AVATAR;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_CAPTCHA;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_EMAIL;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;

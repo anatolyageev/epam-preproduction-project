@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
+
 import static com.epam.anatolii.ageev.constants.WebConstant.AVATAR_PNG_EXTENSION;
 import static com.epam.anatolii.ageev.constants.WebConstant.AVATAR_PNG_FORMAT_NAME;
 import static com.epam.anatolii.ageev.constants.WebConstant.LOGIN_USER;

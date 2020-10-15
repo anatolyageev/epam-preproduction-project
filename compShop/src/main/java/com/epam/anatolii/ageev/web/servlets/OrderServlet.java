@@ -23,7 +23,6 @@ import static com.epam.anatolii.ageev.constants.WebConstant.ORDER;
 import static com.epam.anatolii.ageev.constants.WebConstant.ORDER_SERVICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.PRODUCT_SERVICE;
 import static com.epam.anatolii.ageev.constants.WebConstant.REQUISITES_INPUT;
-import static com.epam.anatolii.ageev.constants.WebConstant.USER_ID;
 import static com.epam.anatolii.ageev.constants.WebConstant.USER_SERVICE;
 
 @WebServlet("/order")
@@ -41,7 +40,7 @@ public class OrderServlet extends HttpServlet {
         Cart cart = (Cart) Optional.ofNullable(session.getAttribute(CART)).orElse(new Cart());
         ProductService productService = (ProductService) req.getServletContext().getAttribute(PRODUCT_SERVICE);
         OrderService orderService = (OrderService) req.getServletContext().getAttribute(ORDER_SERVICE);
-        UserService userService = (UserService ) req.getServletContext().getAttribute(USER_SERVICE);
+        UserService userService = (UserService) req.getServletContext().getAttribute(USER_SERVICE);
         String userLogin = (String) session.getAttribute(LOGIN_USER);
         LOG.debug("userLogin: " + userLogin);
         Long userId = userService.getOne(userLogin).getId();
@@ -49,7 +48,7 @@ public class OrderServlet extends HttpServlet {
         Order newOrder = new Order();
 
         LOG.debug("requisites" + requisites);
-        if(cart.getProductsNumber()<=0) {
+        if (cart.getProductsNumber() <= 0) {
 
         }
         newOrder.setOrderStatus(OrderStatus.GENERATED);
@@ -59,7 +58,7 @@ public class OrderServlet extends HttpServlet {
         LOG.debug("newOrder" + newOrder);
         newOrder = orderService.createOrder(newOrder);
         session.removeAttribute(CART);
-        session.setAttribute(ORDER,newOrder);
-        req.getRequestDispatcher("/WEB-INF/jsp/orderSuccess.jsp").forward(req,resp);
+        session.setAttribute(ORDER, newOrder);
+        req.getRequestDispatcher("/WEB-INF/jsp/orderSuccess.jsp").forward(req, resp);
     }
 }

@@ -18,6 +18,16 @@
         <param-name>securityFile</param-name>
         <param-value>compShop/src/main/resources/security.xml</param-value>
     </context-param>
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.epam.anatolii.ageev.web.filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <filter>
         <filter-name>LocaleFilter</filter-name>
         <filter-class>com.epam.anatolii.ageev.web.filter.LocaleFilter</filter-class>
@@ -76,6 +86,7 @@
         <servlet-name>Products</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
+
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/accessDenied.jsp</location>
