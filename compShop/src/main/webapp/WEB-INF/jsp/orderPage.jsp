@@ -68,7 +68,7 @@
 
                         <div class="col-sm-12 col-md-4 text-right">
                             <button class="btn btn-lg btn-block btn-success text-uppercase" type="submit"
-                                    ><fmt:message key="make.an.order"/>
+                                onclick="deleteAllProduct()" ><fmt:message key="make.an.order"/>
                             </button>
                         </div>
                     </div>

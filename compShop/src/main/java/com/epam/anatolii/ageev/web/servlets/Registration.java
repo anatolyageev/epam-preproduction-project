@@ -79,8 +79,9 @@ public class Registration extends HttpServlet {
         AvatarsUtils.saveAvatar(req, userFromForm.getLogin());
         userService.createUser(userFromForm.getUser());
         emptyValuesAndErrors(req);
-
-        resp.sendRedirect("index.jsp");
+        LOG.error(" Referer in registr:  "+ req.getHeader("Referer"));
+        resp.sendRedirect("products");
+        //resp.sendRedirect("index.jsp");
 
         LOG.debug(getClass() + " doPost() ended");
     }

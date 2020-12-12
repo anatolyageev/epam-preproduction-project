@@ -10,6 +10,8 @@
 
 <div class="col-lg-9">
 
+<%--    <script>deleteAllProduct();</script>--%>
+
 Order ${order.id} id status ${order.orderStatus}
 
 </div>

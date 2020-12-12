@@ -88,7 +88,7 @@
 
                 <form class="form-inline" id="filterForm" method="GET" action="products">
                     <div class="form-group">
-                        <label for="sel1">Sort by:</label>
+                        <label for="sel1"> <fmt:message key="Sort.by"/>:</label>
                         <select class="form-control" id="sel1" name="fieldSort" onchange="this.form.submit()">
                             <option <c:if test="${productFilterBean.sortByField == 'Name'}"> selected </c:if> >Name
                             </option>
@@ -97,7 +97,7 @@
                         </select>
                         <br>
                         <br>
-                        <label for="sel2">Sort direction:</label>
+                        <label for="sel2"><fmt:message key="Sort.direction"/>:</label>
                         <select class="form-control" id="sel2" name="sortDirection" onchange="this.form.submit()">
                             <option <c:if test="${productFilterBean.sortDirection == 'ASC'}"> selected </c:if> >ASC
                             </option>
@@ -105,7 +105,7 @@
                             </option>
                         </select>
                         <br>
-                        <label for="productsPerPage">Per page :</label>
+                        <label for="productsPerPage"><fmt:message key="Per.page"/>:</label>
                         <select class="form-control" id="productsPerPage" name="productsPerPage"
                                 onchange="this.form.submit()">
                             <option <c:if

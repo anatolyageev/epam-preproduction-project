@@ -69,6 +69,7 @@ function makeOrder(isLoginUser) {
     console.log("=== true" + isLoginUser === true);
 
     if (isLoginUser === true) {
+
         window.location = "order";
         return;
     }
