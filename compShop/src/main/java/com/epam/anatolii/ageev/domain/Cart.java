@@ -1,6 +1,5 @@
 package com.epam.anatolii.ageev.domain;
 
-import com.epam.anatolii.ageev.web.servlets.AddToCart;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import org.apache.log4j.Logger;
 
 
 public class Cart {
-    final static Logger LOG = Logger.getLogger(Cart.class);
     private final Map<Product, Integer> cartStorage;
 
     public Cart() {
