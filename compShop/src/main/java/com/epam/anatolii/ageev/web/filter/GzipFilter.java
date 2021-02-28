@@ -38,8 +38,10 @@ public class GzipFilter implements Filter {
             httpServletResponse.addHeader(CONTENT_ENCODING, GZIP);
             GzipWrapper gzipResponse = new GzipWrapper(httpServletResponse);
             chain.doFilter(httpServletRequest, gzipResponse);
+            LOG.debug("GzipFilter befor gzipResponse.close()");
             gzipResponse.close();
         } else {
+            LOG.debug("GzipFilter else");
             chain.doFilter(httpServletRequest, httpServletResponse);
         }
         LOG.debug("GzipFilter doFilter().");

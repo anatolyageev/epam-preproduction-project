@@ -38,6 +38,7 @@ public class LocaleFilter implements Filter {
     private LocaleService localeService;
 
     public void init(FilterConfig filterConfig) {
+        LOG.debug("Local filter init" );
         localeDefault = filterConfig.getInitParameter(LOCALE_DEFAULT);
         localeParams = filterConfig.getInitParameter(LOCALE_PARAMETERS);
         String localeStorage = filterConfig.getInitParameter(LOCALE_STORAGE);
@@ -46,10 +47,12 @@ public class LocaleFilter implements Filter {
         } else {
             localeService = new LocaleServiceSessionImpl();
         }
+        LOG.debug("Local filter init finish" );
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        LOG.debug("Local filter start: " );
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         String locale = httpServletRequest.getParameter(LOCALE);
@@ -75,6 +78,7 @@ public class LocaleFilter implements Filter {
             localizationWrapper = new LocalizationWrapper(httpServletRequest, locale);
         }
         LOG.debug("locale is: " + locale);
+        LOG.debug("Local filter finieh" );
         chain.doFilter(localizationWrapper, httpServletResponse);
     }
 

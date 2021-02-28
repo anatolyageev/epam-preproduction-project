@@ -16,61 +16,61 @@
     </context-param>
     <context-param>
         <param-name>securityFile</param-name>
-        <param-value>compShop/src/main/resources/security.xml</param-value>
+        <param-value>compShop/src/main/webapp/META-INF/security.xml</param-value>
     </context-param>
 
-    <filter>
-        <filter-name>UserFilter</filter-name>
-        <filter-class>com.epam.anatolii.ageev.web.filter.UserFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>UserFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    <filter>-->
+<!--        <filter-name>UserFilter</filter-name>-->
+<!--        <filter-class>com.epam.anatolii.ageev.web.filter.UserFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>UserFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
-    <filter>
-        <filter-name>LocaleFilter</filter-name>
-        <filter-class>com.epam.anatolii.ageev.web.filter.LocaleFilter</filter-class>
-        <init-param>
-            <param-name>localeDefault</param-name>
-            <param-value>en_EN</param-value>
-        </init-param>
-        <init-param>
-            <param-name>localeParameters</param-name>
-            <param-value>en_EN,ru_RU</param-value>
-        </init-param>
-        <init-param>
-            <param-name>localeStorage</param-name>
-            <param-value>session</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cookieAge</param-name>
-            <param-value>86400</param-value>
-        </init-param>
+<!--    <filter>-->
+<!--        <filter-name>LocaleFilter</filter-name>-->
+<!--        <filter-class>com.epam.anatolii.ageev.web.filter.LocaleFilter</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>localeDefault</param-name>-->
+<!--            <param-value>en_EN</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>localeParameters</param-name>-->
+<!--            <param-value>en_EN,ru_RU</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>localeStorage</param-name>-->
+<!--            <param-value>session</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>cookieAge</param-name>-->
+<!--            <param-value>86400</param-value>-->
+<!--        </init-param>-->
 
-    </filter>
-    <filter-mapping>
-        <filter-name>LocaleFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>LocaleFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
-    <filter>
-        <filter-name>TurnOffCacheFilter</filter-name>
-        <filter-class>com.epam.anatolii.ageev.web.filter.TurnOffCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>TurnOffCacheFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    <filter>-->
+<!--        <filter-name>TurnOffCacheFilter</filter-name>-->
+<!--        <filter-class>com.epam.anatolii.ageev.web.filter.TurnOffCacheFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>TurnOffCacheFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
-    <filter>
-        <filter-name>GzipFilter</filter-name>
-        <filter-class>com.epam.anatolii.ageev.web.filter.GzipFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    <filter>-->
+<!--        <filter-name>GzipFilter</filter-name>-->
+<!--        <filter-class>com.epam.anatolii.ageev.web.filter.GzipFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>GzipFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
     <resource-ref>
         <description>Computer shop DB Connection</description>

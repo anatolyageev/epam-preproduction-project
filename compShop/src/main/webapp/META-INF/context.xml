@@ -40,18 +40,52 @@
 <!--              connectionProperties="v$session.osuser=computer-shop;useUnicode=yes;characterEncoding=utf8;"-->
 <!--              url="jdbc:mariadb://localhost:3306/computer_shop"/>-->
 
-        <Resource name="jdbc/ComputerShop"
-                  auth="Container"
-                  type="javax.sql.DataSource"
-                  initialSize="10"
-                  maxActive="100" maxIdle="30" maxWait="10000"
-                  username="admin"
-                  password="!qaz@wsx3E"
-                  driverClassName="org.mariadb.jdbc.Driver"
-                  defaultAutoCommit="false"
-                  defaultTransactionIsolation="READ_COMMITTED"
-                  connectionProperties="v$session.osuser=computer-shop;useUnicode=yes;characterEncoding=utf8;"
-                  url="jdbc:mariadb://192.168.1.100:3307/computer_shop"/>
-</Context>
+<!--        <Resource name="jdbc/ComputerShop"-->
+<!--                  auth="Container"-->
+<!--                  type="javax.sql.DataSource"-->
+<!--                  initialSize="10"-->
+<!--                  maxActive="100" maxIdle="30" maxWait="10000"-->
+<!--                  username="admin"-->
+<!--                  password="!qaz@wsx3E"-->
+<!--                  driverClassName="org.mariadb.jdbc.Driver"-->
+<!--                  defaultAutoCommit="false"-->
+<!--                  defaultTransactionIsolation="READ_COMMITTED"-->
+<!--                  connectionProperties="v$session.osuser=computer-shop;useUnicode=yes;characterEncoding=utf8;"-->
+<!--                  url="jdbc:mariadb://192.168.1.100:3307/computer_shop"/>-->
+<!--</Context>-->
+
+<Resource name="jdbc/ComputerShop"
+          auth="Container"
+          type="javax.sql.DataSource"
+          initialSize="10"
+          maxActive="100" maxIdle="30" maxWait="10000"
+          username="azureadmin@mysqlageev"
+          password="!qaz2wsx3edC"
+          driverClassName="com.mysql.cj.jdbc.Driver"
+          defaultAutoCommit="false"
+          defaultTransactionIsolation="READ_COMMITTED"
+          connectionProperties="useUnicode=yes;characterEncoding=utf8;"
+          useSSL="true"
+          requireSSL="false"
+          url="jdbc:mysql://mysqlageev.mysql.database.azure.com:3306/computer_shop?serverTimezone=Europe/Moscow"
+
+/>
+        </Context>
+
+<!--            <Resource name="jdbc/QuizDB"-->
+<!--                      auth="Container"-->
+<!--                      type="javax.sql.DataSource"-->
+<!--                      maxActive="100" maxIdle="30" maxWait="10000"-->
+<!--                      username="azureadmin@mysqlageev"-->
+<!--                      password="!qaz2wsx3edC"-->
+<!--                      driverClassName="com.mysql.cj.jdbc.Driver"-->
+<!--                      defaultAutoCommit="false"-->
+<!--                      defaultTransactionIsolation="READ_COMMITTED"-->
+<!--                      connectionProperties="useUnicode=yes;characterEncoding=utf8;"-->
+<!--                      useSSL="true"-->
+<!--                      requireSSL="false"-->
+<!--                      url="jdbc:mysql://mysqlageev.mysql.database.azure.com:3306/quizdb"-->
+
+<!--            />-->
 
 
