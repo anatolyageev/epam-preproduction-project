@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import com.epam.anatolii.ageev.eshop.annotations.FieldDescription;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -32,6 +34,7 @@ public class Laptop extends Computer {
         return screenSize;
     }
 
+    @FieldDescription("SCREEN_SIZE")
     public void setScreenSize(Double screenSize) {
         this.screenSize = screenSize;
     }

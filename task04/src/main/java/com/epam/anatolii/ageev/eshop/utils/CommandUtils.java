@@ -15,6 +15,7 @@ public class CommandUtils {
     public static final String DATE_REGEX = "\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}";
     public static final String DIGIT_FORMAT = "[+-]?([0-9]*[.])?[0-9]+";
 
+
     public static Date enterDate() {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         format.setLenient(false);
@@ -79,5 +80,23 @@ public class CommandUtils {
         BigDecimal bd = BigDecimal.valueOf(random);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    public static ResourceBundle getResourceBundle(){
+
+        System.out.println("Please choose language ru/en:");
+        return ResourceBundle.getBundle("locale" ,new Locale(validateLocaleInput()));
+    }
+
+    private static String validateLocaleInput() {
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            String input = scanner.nextLine().trim();
+           if(input.equals("ru") || input.equals("en")){
+               return input;
+           }else {
+               System.out.println("Please input ru or en.");
+           }
+        }
     }
 }

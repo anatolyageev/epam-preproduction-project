@@ -1,5 +1,7 @@
 package com.epam.anatolii.ageev.eshop.domain;
 
+import com.epam.anatolii.ageev.eshop.annotations.FieldDescription;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -22,6 +24,7 @@ public abstract class Computer extends Item {
         return processorType;
     }
 
+    @FieldDescription("PROCESSOR_TYPE")
     public void setProcessorType(String processorType) {
         this.processorType = processorType;
     }
@@ -30,6 +33,7 @@ public abstract class Computer extends Item {
         return processorFrequency;
     }
 
+    @FieldDescription("PROCESSOR_FREQUENCY")
     public void setProcessorFrequency(Double processorFrequency) {
         this.processorFrequency = processorFrequency;
     }
@@ -38,6 +42,7 @@ public abstract class Computer extends Item {
         return installedMemory;
     }
 
+    @FieldDescription("INSTALLED_MEMORY")
     public void setInstalledMemory(Integer installedMemory) {
         this.installedMemory = installedMemory;
     }

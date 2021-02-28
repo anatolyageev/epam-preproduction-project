@@ -19,7 +19,9 @@ public class CommandContainer {
         commands.put(CommandConstants.SHOW_ORDER_BY_DATE, new ShowOrderCommand());
         commands.put(CommandConstants.SHOW_LAST_FIVE_ITEMS, new ShowLastFiveItemsCommand());
         commands.put(CommandConstants.ADD_NEW_ITEM_TO_DB,new AddNewItemToDBCommand());
+        commands.put(CommandConstants.ADD_NEW_ITEM_REFLACTION, new AddNewItemToDbReflectionCommand());
         commands.put(CommandConstants.NO_SUCH_COMMAND, new NoCommand());
+
         commands.put(CommandConstants.EXIT, new ExitCommand());
     }
 
@@ -27,7 +29,7 @@ public class CommandContainer {
      * Returns command object with the given Id.
      *
      * @param commandId Id of the command.
-     * @return Command object.
+     * @return ServerCommand object.
      */
     public static Command get(Integer commandId) {
         if (commandId == null || !commands.containsKey(commandId)) {

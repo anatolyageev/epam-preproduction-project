@@ -15,6 +15,9 @@
         <module>task03</module>
         <module>task04</module>
         <module>task05</module>
+        <module>task07</module>
+        <module>task08</module>
+        <module>compShop</module>
     </modules>
 
     <name>epam-preproduction-project</name>
